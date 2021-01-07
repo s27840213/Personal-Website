@@ -1,0 +1,7 @@
+@function setZindex($value) {
+  @return map-get($zindex, $value);
+}
+
+@function setColor($color) {
+  @return map-get($colors, $color);
+}
