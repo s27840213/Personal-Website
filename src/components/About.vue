@@ -1,5 +1,6 @@
 <template lang="pug">
   div(class="about")
+    h1 About
 </template>
 
 <script>
@@ -10,6 +11,8 @@ export default {
 
 <style lang="scss" scoped>
 .about {
-  @include size(100%, 200px);
+  width: 100%;
+  height: 100vh;
+  background-color: setColor(primary);
 }
 </style>

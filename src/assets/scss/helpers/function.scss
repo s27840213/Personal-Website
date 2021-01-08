@@ -2,6 +2,6 @@
   @return map-get($zindex, $value);
 }
 
-@function setColor($color) {
-  @return map-get($colors, $color);
+@function setColor($color, $opacity: 1) {
+  @return rgba(map-get($colors, $color), $opacity);
 }

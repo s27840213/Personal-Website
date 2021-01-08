@@ -1,10 +1,10 @@
 <template lang="pug">
   div(class="landing-page")
-    div(class="planet__earth")
-    div(class="planet__html")
-    div(class="planet__js")
-    div(class="planet__css")
-    div(class="planet__vue")
+    //- div(class="planet__earth")
+    //- div(class="planet__html")
+    //- div(class="planet__js")
+    //- div(class="planet__css")
+    //- div(class="planet__vue")
 </template>
 
 <script>
@@ -18,6 +18,7 @@ export default {
   background-image: map-get($linear-gradient, primary);
   position: relative;
   overflow: hidden;
+  height: 100vh;
 }
 
 .planet {
