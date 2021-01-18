@@ -1,5 +1,6 @@
 <template lang="pug">
   div(class="contact")
+    div(class="dividor")
     h1 Contack
 </template>
 
@@ -16,4 +17,3 @@ export default {
   background-color: setColor(primary);
 }
 </style>
-

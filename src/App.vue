@@ -1,10 +1,11 @@
 <template lang="pug">
   div(id="app")
-    navbar(:navList="['Home','About','Portofolio','Contact']" @switchMenu="switchMenus")
+    //- navbar(:navList="['Home','About','Portofolio','Contact']" @switchMenu="switchMenus")
     router-view
 </template>
 <script>
 import Navbar from '@/components/Navbar.vue'
+
 export default {
   components: {
     Navbar
@@ -18,7 +19,6 @@ export default {
 <style lang="scss">
 #app {
   @include size(100%, 100%);
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -1,5 +1,5 @@
 @function setZindex($value) {
-  @return map-get($zindex, $value);
+  @return index($zindex, $value);
 }
 
 @function setColor($color, $opacity: 1) {

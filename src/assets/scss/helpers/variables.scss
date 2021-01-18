@@ -1,21 +1,40 @@
-$colors: (
-  primary: #0a1b29,
-  secondary: #2d6585,
-  white: #fff,
-  black: #0e0314,
-  text-content: #70c2c9,
-);
+// $colors: (
+//   primary: #0a1f29,
+//   secondary: #263b4d,
+//   white: #fff,
+//   black: #0e0314,
+//   text-color: #70c2c9,
+//   text-color-light: #70c2c9,
+// );
 
+$colors: (
+  primary: #0a1f29,
+  secondary: #3c6478,
+  white: #ebede9,
+  black: #0e0314,
+  text-color: #70c2c9,
+  text-color-light: #a4dddb,
+  text-color-dark: #578aa1,
+);
 $shadow: (
-  primary-8: 0 0 8px #95d2d7,
+  primary-8: 0 0 8px #94c4d6,
 );
 
 $linear-gradient: (
-  primary: linear-gradient(90deg, #0a1b29 0%, #2d6585 100%),
+  primary: linear-gradient(90deg, #0a1b29 30%, #2d6585 100%),
 );
 
 $zindex: (
-  navbar: 500,
-  planet: 400,
-  default: 1,
+  "default",
+  "planet__css",
+  "planet__vue",
+  "planet__figma",
+  "planet__python",
+  "planet__kyronus",
+  "planet__normal",
+  "planet__js",
+  "planet__html",
+  "planet__earth",
+  "paragraph",
+  "navbar"
 );

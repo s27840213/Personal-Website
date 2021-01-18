@@ -26,11 +26,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .navbar {
-  position: fixed;
-  top: 20px;
-  left: 20px;
   display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  width: 100%;
+  // background-color: setColor(primary, 0.8);
   z-index: setZindex(navbar);
+  padding: 20px 40px;
   &__item {
     font-size: 20px;
     margin: 0 20px;
