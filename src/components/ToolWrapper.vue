@@ -21,9 +21,6 @@ export default {
 
     }
   },
-  created () {
-    console.log('hi')
-  },
   methods: {
     getIcon (icon) {
       return require('@/assets/icon/ps.svg')
@@ -40,12 +37,13 @@ export default {
 
 <style lang="scss" scoped>
 .toolwrapper {
-  display: block;
-  background-color: red;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
   &__icon {
     margin-right: 10px;
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 </style>

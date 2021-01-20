@@ -1,6 +1,5 @@
 <template lang="pug">
   div(class="root")
-    div(class="dividor")
     h1(class="heading") About Me
     div(class="myinfo")
       div
@@ -28,7 +27,7 @@ export default {
     grid-template-columns: 1fr minmax(200px, 300px);
     grid-template-rows: 1fr;
     column-gap: 10vh;
-    padding: 80px 250px;
+    padding: 60px 250px;
     > div:nth-child(1) {
       // For the right part infomation
       display: flex;

@@ -3,7 +3,9 @@ div(class="home")
   landing-page
   div(class="dividor")
   about
+  div(class="dividor")
   skills
+  div(class="dividor")
   contact
 </template>
 

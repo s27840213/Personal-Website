@@ -1,25 +1,21 @@
 <template lang="pug">
   div(class="root")
-    div(class="dividor")
     h1 Skills
-    div(class="programming")
-      div
-        div(class="programming__title")
-          span Programmer
-        div(class="programming__skill")
-          span Programming Skill(Advanced)
-            div(style="height: 30px; background-color: red")
-            //- tool-wrapper(:fontSize="16" :icon="sass" toolName="Photoshop")
-          br
-          span Programming Skill(Intermediate)
-      div
-    div(class="design")
-      div
-        div(class="design__title")
-          span Designer
-        div(class="design__tool")
-          span Design Tool
-      div
+    div
+      div(class="programming")
+        div
+          div(class="programming__title")
+            h2 Programmer
+          div(class="programming__skill")
+            div
+              span Programming Skill (Advanced)
+            div
+              tool-wrapper(v-for="i in 10" :key="`tool-${i}`" :fontSize="16" :icon="'sass'" toolName="Photoshop")
+            div
+              span Programming Skill (Intermediate)
+            div
+              tool-wrapper(v-for="i in 10" :key="`tool-${i}`" :fontSize="16" :icon="'sass'" toolName="Photoshop")
+        div
 </template>
 
 <script>
@@ -34,7 +30,45 @@ export default {
 <style lang="scss" scoped>
 .root {
   width: 100%;
-  height: 100vh;
   background-color: setColor(primary);
+  box-sizing: border-box;
+  > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    padding: 60px 250px;
+  }
+
+  .programming {
+    width: 100%;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr minmax(200px, 300px);
+    grid-template-rows: 1fr;
+    column-gap: 30px;
+    // display: flex;
+    // align-items: center;
+    > div:nth-child(2) {
+      background-color: white;
+    }
+    &__skill {
+      margin-left: 2rem;
+      > div:nth-child(2) {
+        display: flex;
+        flex-wrap: wrap;
+        .toolwrapper::v-deep {
+          margin: 10px;
+          color: setColor(text-color-light, 1);
+        }
+      }
+      > div:nth-child(4) {
+        display: flex;
+        flex-wrap: wrap;
+        .toolwrapper::v-deep {
+          margin: 10px;
+          color: setColor(text-color-light, 1);
+        }
+      }
+    }
+  }
 }
 </style>

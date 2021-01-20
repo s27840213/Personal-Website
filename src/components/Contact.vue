@@ -1,6 +1,5 @@
 <template lang="pug">
   div(class="contact")
-    div(class="dividor")
     h1 Contack
 </template>
 
