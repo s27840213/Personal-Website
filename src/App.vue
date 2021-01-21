@@ -1,6 +1,6 @@
 <template lang="pug">
   div(id="app")
-    //- navbar(:navList="['Home','About','Portofolio','Contact']" @switchMenu="switchMenus")
+    navbar(:navList="['Home','About','Skills','Portofolio','Contact']" @switchMenu="switchMenus")
     router-view
 </template>
 <script>
@@ -23,5 +23,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: setColor(white);
+  background-color: setColor(primary);
 }
 </style>

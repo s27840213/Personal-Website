@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="navbar")
+  div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color' : atTop ? 'white' : 'transparent' , 'color' : atTop ? 'black' : 'white'}")
     div(class="navbar__item" v-for="item in navList "
       @click="switchMenu(item)") {{item}}
 </template>
@@ -13,14 +13,33 @@ export default {
   },
   data () {
     return {
-      curr: this.defaultSelected ? this.defaultSelected : this.navList[0]
+      curr: this.defaultSelected ? this.defaultSelected : this.navList[0],
+      showNavbar: true,
+      lastScrollPosition: 0,
+      atTop: true
     }
   },
   methods: {
     switchMenu (item) {
       this.curr = item
       this.$emit('switchMenu', item)
+    },
+    onScroll () {
+      console.log(window.pageYOffset)
+      window.pageYOffset !== 0 ? this.atTop = false : this.atTop = true
+      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop
+      if (currentScrollPosition < 0) {
+        return
+      }
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition
+      this.lastScrollPosition = currentScrollPosition
     }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
   }
 }
 </script>
@@ -32,18 +51,24 @@ export default {
   left: 0px;
   display: flex;
   width: 100%;
-  // background-color: setColor(primary, 0.8);
   z-index: setZindex(navbar);
-  padding: 20px 40px;
+  padding: 10px 40px;
+  transition: 0.5s;
   &__item {
-    font-size: 20px;
+    font-size: 1.2rem;
     margin: 0 20px;
+    cursor: pointer;
     &:nth-child(1) {
       margin-left: 0;
     }
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  &--hidden {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
   }
 }
 </style>

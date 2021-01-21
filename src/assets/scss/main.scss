@@ -18,6 +18,12 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin pdGeneral() {
+  padding: 60px calc((100vw - 1200px) / 2);
+  box-sizing: border-box;
+  // padding: 60px clamp(120px, 20vw, 400px);
+}
 html,
 body {
   font-family: "Noto Sans TC", sans-serif;
@@ -46,6 +52,32 @@ h2 {
   // margin-left: 80px;
   // text-align: left;
   text-shadow: 2px 2px 7px #4d91b8;
+  position: relative;
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   height: 40%;
+  //   width: 30vw;
+  //   right: 10vh;
+  //   top: 50%;
+  //   overflow: hidden;
+  //   border-left: 2px solid setColor(text-color-light);
+  //   border-bottom: 2px solid setColor(text-color-light);
+  //   transform: translateY(-50%) skew(-20deg);
+  //   transform-origin: 0% 100%;
+  // }
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   height: 40%;
+  //   width: 30vw;
+  //   left: 10vh;
+  //   top: 50%;
+  //   border-right: 2px solid setColor(text-color-light);
+  //   border-top: 2px solid setColor(text-color-light);
+  //   transform: translateY(-50%) skew(-20deg);
+  //   transform-origin: 0% 100%;
+  // }
 }
 
 .dividor {

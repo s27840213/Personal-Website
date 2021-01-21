@@ -13,6 +13,5 @@ export default {
 .contact {
   width: 100%;
   height: 100vh;
-  background-color: setColor(primary);
 }
 </style>

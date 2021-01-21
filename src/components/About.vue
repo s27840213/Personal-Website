@@ -9,7 +9,7 @@
         div(class="myinfo__job") - Junior Front-end Developer | Junior UI/UX Designer -
         div(class="myinfo__description")  Passionate about coding with motion graphic design. Like to learning  new technologies to sharpen my programming skills. I’m currently work as an front-end developer and UI/UX designer in an indepentent game developemt studio -- CItyChaser, and now I’m serving the alternative millitary service at Tainan.
       div
-        div(class="myinfo__avatar")
+        img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
 </template>
 
 <script>
@@ -21,15 +21,14 @@ export default {
 <style lang="scss" scoped>
 .root {
   width: 100%;
-  background-color: setColor(primary);
   .myinfo {
     display: grid;
-    grid-template-columns: 1fr minmax(200px, 300px);
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    column-gap: 10vh;
-    padding: 60px 250px;
+    column-gap: clamp(100px, 10vh, 200px);
+    @include pdGeneral;
+    // padding: 60px 250px;
     > div:nth-child(1) {
-      // For the right part infomation
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -37,11 +36,8 @@ export default {
       padding: 30px 0;
       color: setColor(text-color-light);
     }
-    > div:nth-child(2) {
-      // For the left part image section
-      height: 100%;
-      width: 100%;
-      background-color: red;
+    &__avatar {
+      width: clamp(300px, 100%, 100%);
     }
     &__name {
       font-size: 2rem;
@@ -52,7 +48,7 @@ export default {
     }
     &__job {
       font-size: 1rem;
-      color: setColor(text-color);
+      color: setColor(text-color-dark);
     }
     &__description {
       text-align: left;

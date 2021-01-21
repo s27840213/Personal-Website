@@ -1,6 +1,7 @@
 <template lang="pug">
   div(class="landing-page")
-    div(class="avatar")
+    div
+      img(class="avatar" :src="require('@/assets/img/avatar.jpg')")
     div(class="message")
       span Hi, I'm Alan
         br
@@ -35,17 +36,33 @@ export default {
   background-size: cover;
   position: relative;
   overflow: hidden;
+  > div:nth-child(1) {
+    @include flexCenter;
+    padding: 5px;
+    background: white;
+    margin-left: 6vw;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
 }
 .avatar {
   @include size(200px);
-  background-color: white;
   border-radius: 50%;
-  margin-left: 6vw;
-  margin-right: 20px;
+  box-shadow: 0px 0px 10px rgba(setColor(primary), 0.5);
+  // filter: drop-shadow(0 0 15px rgba(#4d91b8, 0.5));
+  ::after {
+    content: "12312313";
+    color: white;
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+  }
 }
 .message {
   color: white;
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 5vw, 3rem);
   font-family: "Aero";
   text-align: left;
   z-index: setZindex("paragraph");
