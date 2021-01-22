@@ -1,23 +1,32 @@
-// $colors: (
-//   primary: #0a1f29,
-//   secondary: #263b4d,
-//   white: #fff,
-//   black: #0e0314,
-//   text-color: #70c2c9,
-//   text-color-light: #70c2c9,
-// );
-
 $colors: (
   primary: #0a1f29,
-  secondary: #3c6478,
-  white: #ebede9,
+  secondary: #263b4d,
+  white: #fff,
   black: #0e0314,
-  text-color: #a4dddb,
-  text-color-light: #a4dddb,
-  // text-color: #70c2c9,
-    // text-color-light: #a4dddb,
-    text-color-dark: #70c2c9,
+  text-color: #70c2c9,
+  text-color-light: #70c2c9,
 );
+
+// $colors: (
+//   primary: #0a1f29,
+//   secondary: #3c6478,
+//   white: #ebede9,
+//   black: #0e0314,
+//   text-color: #91c6c5,
+//   text-color-light: #b4e3e1,
+//   text-color-dark: #70c2c9,
+// );
+
+// $colors: (
+//   primary: #28272c,
+//   secondary: #242d64,
+//   white: #ebede9,
+//   black: #0e0314,
+//   text-color: #8b8b8c,
+//   text-color-light: #69b5a2,
+//   text-color-dark: #8b8b8c,
+// );
+
 $shadow: (
   primary-8: 0 0 8px #94c4d6,
 );
@@ -37,6 +46,7 @@ $zindex: (
   "planet__js",
   "planet__html",
   "planet__earth",
+  "avatar",
   "paragraph",
   "navbar"
 );

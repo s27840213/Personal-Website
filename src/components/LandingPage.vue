@@ -3,37 +3,42 @@
     div
       img(class="avatar" :src="require('@/assets/img/avatar.jpg')")
     div(class="message")
-      span Hi, I'm Alan
-        br
-        span Welcome to
-        br
-        span My Personal Universe!
-    div(class="planet__earth")
-    div(class="planet__html")
-    div(class="planet__js")
-    div(class="planet__css")
-    div(class="planet__vue")
-    div(class="planet__figma")
-    div(class="planet__python")
-    div(class="planet__kyronus")
-    div(class="planet__normal")
+      span Hello, I'm Alan
+      br
+      span Welcome to
+      br
+      span My Personal Website!
+    - for (i = 1; i <= 100; i++)
+      .circle-container
+        .circle
 </template>
 
 <script>
 export default {
-
+  mounted () {
+    document.addEventListener('mousemove', this.parallax)
+  },
+  methods: {
+    parallax (e) {
+      document.querySelectorAll('.planet').forEach(planet => {
+        const speed = planet.getAttribute('data-speed')
+        const x = (window.innerWidth - e.pageX * speed) / 200
+        const y = (window.innerHeight - e.pageY * speed) / 200
+        planet.style.transform = `translateX(${x}px) translateY(${y}px)`
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .landing-page {
   display: flex;
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
   @include size(100vw, 100vh);
   max-width: 100%;
-  background-image: url("~@/assets/img/bg-texture.png");
-  background-position: center;
-  background-size: cover;
+  position: relative;
   position: relative;
   overflow: hidden;
   > div:nth-child(1) {
@@ -43,6 +48,34 @@ export default {
     margin-left: 6vw;
     margin-right: 20px;
     border-radius: 50%;
+    z-index: setZindex("avatar");
+  }
+  &::after {
+    content: "1234";
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    // transform: translate3d(0, -35%, 0);
+    background-image: radial-gradient(
+      circle at 50% -10%,
+      #1e3740 20%,
+      #1d353f 20%,
+      #1d353f 30%,
+      #1b333d 30%,
+      #1b333d 40%,
+      #19313b 40%,
+      #19313b 50%,
+      #172e38 50%,
+      #172e38 60%,
+      #142b35 60%,
+      #142b35 70%,
+      #122832 70%,
+      #122832 80%,
+      #0f252f 80%,
+      #0f252f 90%,
+      #0d222c 90%,
+      #0a1f29 100%
+    );
   }
 }
 .avatar {
@@ -63,99 +96,10 @@ export default {
 .message {
   color: white;
   font-size: clamp(1.5rem, 5vw, 3rem);
-  font-family: "Aero";
+  font-family: "Passion One";
+  // font-style: italic;
   text-align: left;
   z-index: setZindex("paragraph");
-  text-shadow: 3px 3px 10px #4d91b8;
-}
-.planet {
-  &__earth {
-    position: absolute;
-    right: 30px;
-    bottom: 0px;
-    transform: translateY(78%);
-    @include size(60vw);
-    background-image: url("~@/assets/img/planet-earth.png");
-    background-size: cover;
-    filter: drop-shadow(0px 0px 30px rgba(#28eef5, 0.5));
-  }
-  &__html {
-    position: absolute;
-    right: 30px;
-    bottom: 70px;
-    @include size(250px, 250px);
-    background-image: url("~@/assets/img/planet-html.png");
-    background-size: cover;
-  }
-  &__js {
-    position: absolute;
-    right: 40%;
-    bottom: 150px;
-    @include size(200px, 200px);
-    background-image: url("~@/assets/img/planet-js.png");
-    background-size: cover;
-    filter: drop-shadow(0 0 15px rgba(#f3ef00, 0.5));
-    opacity: 0.95;
-  }
-  &__css {
-    position: absolute;
-    right: 22%;
-    bottom: 30%;
-    @include size(180px, 180px);
-    background-image: url("~@/assets/img/planet-css.png");
-    background-size: cover;
-    filter: drop-shadow(0 0 25px rgba(#36ffe7, 0.8));
-    opacity: 0.9;
-  }
-  &__vue {
-    position: absolute;
-    right: 8%;
-    bottom: 50%;
-    @include size(120px, 120px);
-    background-image: url("~@/assets/img/planet-vue.png");
-    background-size: cover;
-    filter: drop-shadow(0 0 15px rgba(#51b841, 0.8));
-    opacity: 0.84;
-  }
-  &__figma {
-    position: absolute;
-    right: 22%;
-    bottom: 60%;
-    @include size(90px, 90px);
-    background-image: url("~@/assets/img/planet-figma.png");
-    background-size: cover;
-    filter: drop-shadow(0 0 15px rgba(#faffbb, 0.8));
-    opacity: 0.81;
-  }
-  &__python {
-    position: absolute;
-    right: 32%;
-    bottom: 68%;
-    @include size(70px, 70px);
-    background-image: url("~@/assets/img/planet-python.png");
-    background-size: cover;
-    filter: drop-shadow(0 0 15px rgba(#40aac7, 0.8));
-    opacity: 0.78;
-  }
-  &__kyronus {
-    position: absolute;
-    right: 22%;
-    bottom: 78%;
-    @include size(50px, 50px);
-    background-image: url("~@/assets/img/planet-kyronus.png");
-    background-size: cover;
-    filter: drop-shadow(0 0 15px rgba(#f3ef00, 0.5));
-    opacity: 0.75;
-  }
-  &__normal {
-    position: absolute;
-    right: 15%;
-    bottom: 86%;
-    @include size(30px, 30px);
-    background-image: url("~@/assets/img/planet-normal.png");
-    background-size: cover;
-    filter: drop-shadow(0 0 25px rgba(#36ffe7, 0.8));
-    opacity: 0.72;
-  }
+  text-shadow: 3px 3px 3px #4d91b8;
 }
 </style>

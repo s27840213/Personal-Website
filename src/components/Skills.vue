@@ -15,8 +15,10 @@
           div
             tool-wrapper(v-for="i in 10" :key="`tool-${i}`" :fontSize="16" :icon="'sass'" toolName="Photoshop")
       div
+        img(:src="require('@/assets/img/designer4.svg')")
     div(class="design")
       div
+        img(:src="require('@/assets/img/designer.svg')")
       div
         div(class="programming__title")
           h2 Designer
@@ -60,13 +62,21 @@ export default {
     @include pdGeneral;
     padding-bottom: 0px;
     > div:nth-child(2) {
-      background-color: white;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 30px;
+      > img {
+        width: 100%;
+      }
     }
     &__skill {
       margin-left: 2rem;
       > div:nth-child(2) {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
         .toolwrapper::v-deep {
           margin: 10px;
           color: setColor(text-color-light, 1);
@@ -91,7 +101,7 @@ export default {
     column-gap: clamp(30px, 10vh, 150px);
     @include pdGeneral;
     > div:nth-child(1) {
-      background-color: white;
+      padding: 30px;
     }
     &__skill {
       margin-left: 2rem;

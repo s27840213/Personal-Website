@@ -1,7 +1,10 @@
 <template lang="pug">
-  div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color' : atTop ? 'white' : 'transparent' , 'color' : atTop ? 'black' : 'white'}")
+  //- div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color' : atTop ? '#0f252f' : 'transparent' , 'color' : atTop ? 'white' : 'white'}")
+  div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color':'#0f252f', 'color' : atTop ? 'white' : 'white'}")
     div(class="navbar__item" v-for="item in navList "
-      @click="switchMenu(item)") {{item}}
+      @click="switchMenu(item)")
+      div(class="navbar__icon")
+      span {{item}}
 </template>
 
 <script>
@@ -49,15 +52,21 @@ export default {
   position: fixed;
   top: 0px;
   left: 0px;
-  display: flex;
   width: 100%;
   z-index: setZindex(navbar);
   padding: 10px 40px;
   transition: 0.5s;
+  &__icon {
+    @include size(25px);
+    background-color: setColor(white);
+    border-radius: 50%;
+    margin-right: 10px;
+  }
   &__item {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0 20px;
     cursor: pointer;
+    @include flexCenter;
     &:nth-child(1) {
       margin-left: 0;
     }

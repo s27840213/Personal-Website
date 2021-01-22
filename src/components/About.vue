@@ -9,7 +9,8 @@
         div(class="myinfo__job") - Junior Front-end Developer | Junior UI/UX Designer -
         div(class="myinfo__description")  Passionate about coding with motion graphic design. Like to learning  new technologies to sharpen my programming skills. I’m currently work as an front-end developer and UI/UX designer in an indepentent game developemt studio -- CItyChaser, and now I’m serving the alternative millitary service at Tainan.
       div
-        img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
+        div(class="myinfo__avatar")
+        //- img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
 </template>
 
 <script>
@@ -21,6 +22,7 @@ export default {
 <style lang="scss" scoped>
 .root {
   width: 100%;
+  background-image: url("~@/assets/img/grids.png");
   .myinfo {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -34,10 +36,11 @@ export default {
       justify-content: flex-start;
       align-items: flex-start;
       padding: 30px 0;
-      color: setColor(text-color-light);
     }
     &__avatar {
       width: clamp(300px, 100%, 100%);
+      height: clamp(300px, 100%, 100%);
+      background-color: white;
     }
     &__name {
       font-size: 2rem;
@@ -48,12 +51,14 @@ export default {
     }
     &__job {
       font-size: 1rem;
-      color: setColor(text-color-dark);
+      color: setColor(text-color-light);
+      font-weight: bold;
     }
     &__description {
       text-align: left;
       margin-top: 20px;
       line-height: 2.5;
+      color: setColor(text-color);
     }
   }
 }

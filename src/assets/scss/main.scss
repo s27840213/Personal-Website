@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC");
 @import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap");
 @font-face {
   font-family: "Aero";
   src: url("~@/assets/font/Aero.ttf");
@@ -20,7 +21,7 @@
 }
 
 @mixin pdGeneral() {
-  padding: 60px calc((100vw - 1200px) / 2);
+  padding: 60px calc((100vw - 1100px) / 2);
   box-sizing: border-box;
   // padding: 60px clamp(120px, 20vw, 400px);
 }
@@ -39,7 +40,9 @@ h1 {
   margin-top: 1rem;
   margin-bottom: 1.5rem;
   text-shadow: 2px 2px 7px #4d91b8;
-  font-family: "Aero";
+  font-family: "Passion One";
+  font-style: italic;
+  // font-family: "Aero";
 }
 
 h2 {
