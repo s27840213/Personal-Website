@@ -1,7 +1,6 @@
 <template lang="pug">
 div(class="home")
   landing-page
-  div(class="dividor")
   about
   div(class="dividor")
   skills

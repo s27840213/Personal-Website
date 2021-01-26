@@ -28,7 +28,7 @@ export default {
       this.$emit('switchMenu', item)
     },
     onScroll () {
-      console.log(window.pageYOffset)
+      // console.log(window.pageYOffset)
       window.pageYOffset !== 0 ? this.atTop = false : this.atTop = true
       const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop
       if (currentScrollPosition < 0) {

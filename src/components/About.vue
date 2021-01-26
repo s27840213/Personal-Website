@@ -6,7 +6,7 @@
         div(class="myinfo__name")
           span Yu-Chen Chang
           span  (Alan)
-        div(class="myinfo__job") - Junior Front-end Developer | Junior UI/UX Designer -
+        div(class="myinfo__job") - Junior Front-end Developer | Just For Fun Designer -
         div(class="myinfo__description")  Passionate about coding with motion graphic design. Like to learning  new technologies to sharpen my programming skills. I’m currently work as an front-end developer and UI/UX designer in an indepentent game developemt studio -- CItyChaser, and now I’m serving the alternative millitary service at Tainan.
       div
         div(class="myinfo__avatar")
@@ -22,7 +22,6 @@ export default {
 <style lang="scss" scoped>
 .root {
   width: 100%;
-  background-image: url("~@/assets/img/grids.png");
   .myinfo {
     display: grid;
     grid-template-columns: 1fr 1fr;
