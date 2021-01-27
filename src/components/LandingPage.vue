@@ -10,17 +10,10 @@
     img(class="layer layer6" data-speed= "7" :src="require('@/assets/img/landingPage/layer6.svg')")
     img(class="layer layer7" data-speed= "8" :src="require('@/assets/img/landingPage/layer7.svg')")
     img(class="layer layer__moon" data-speed= "10" :src="require('@/assets/img/landingPage/moon.svg')")
-    //- div
-    //-   img(class="avatar" :src="require('@/assets/img/avatar.jpg')")
-    //- div(class="message")
-    //-   span Hello, I'm Alan
-    //-   br
-    //-   span Welcome to
-    //-   br
-    //-   span My Personal Website!
-    //- - for (i = 1; i <= 100; i++)
-    //-   .circle-container
-    //-     .circle
+    div(class="message")
+      div Welcome Here
+      div I'm Alan Chang
+      div Front-end Engineer | Just For Fun Designer
 </template>
 
 <script>
@@ -62,15 +55,7 @@ export default {
   max-width: 100%;
   position: relative;
   overflow: hidden;
-  > div:nth-child(1) {
-    @include flexCenter;
-    padding: 5px;
-    background: white;
-    margin-left: 6vw;
-    margin-right: 20px;
-    border-radius: 50%;
-    z-index: setZindex("avatar");
-  }
+
   .layer {
     position: absolute;
     &1 {
@@ -158,28 +143,22 @@ export default {
   //   );
   // }
 }
-.avatar {
-  @include size(200px);
-  border-radius: 50%;
-  box-shadow: 0px 0px 10px rgba(setColor(primary), 0.5);
-  // filter: drop-shadow(0 0 15px rgba(#4d91b8, 0.5));
-  ::after {
-    content: "12312313";
-    color: white;
-    top: 0px;
-    left: 0px;
-    width: 300px;
-    height: 300px;
-    background-color: #fff;
-  }
-}
 .message {
-  color: white;
-  font-size: clamp(1.5rem, 5vw, 3rem);
-  font-family: "Passion One";
-  // font-style: italic;
-  text-align: left;
+  color: setColor(primary);
+  font-weight: bold;
   z-index: setZindex("paragraph");
-  text-shadow: 3px 3px 3px #4d91b8;
+  > div {
+    &:nth-child(1) {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+    &:nth-child(2) {
+      font-size: 48px;
+      line-height: 36px;
+    }
+    &:nth-child(3) {
+      font-size: 24px;
+      color: setColor(secondary);
+    }
+  }
 }
 </style>

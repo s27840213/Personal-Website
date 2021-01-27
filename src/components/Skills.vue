@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="root")
-    h1 Skills
+    h1 Skill Set
     div(class="programming")
       div
         div(class="programming__title")

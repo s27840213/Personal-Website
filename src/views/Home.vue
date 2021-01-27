@@ -2,11 +2,8 @@
 div(class="home")
   landing-page
   about
-  div(class="dividor")
   skills
-  div(class="dividor")
   portofolio
-  div(class="dividor")
   contact
 </template>
 
