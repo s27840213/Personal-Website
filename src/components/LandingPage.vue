@@ -9,17 +9,70 @@
     img(class="layer layer5" data-speed= "6" :src="require('@/assets/img/landingPage/layer5.svg')")
     img(class="layer layer6" data-speed= "7" :src="require('@/assets/img/landingPage/layer6.svg')")
     img(class="layer layer7" data-speed= "8" :src="require('@/assets/img/landingPage/layer7.svg')")
-    img(class="layer layer__moon" data-speed= "10" :src="require('@/assets/img/landingPage/moon.svg')")
-    div(class="message")
-      div Welcome Here
-      div I'm Alan Chang
-      div Front-end Engineer | Just For Fun Designer
+    img(class="layer layer8" data-speed= "10" :src="require('@/assets/img/landingPage/moon.svg')")
+    div(class="msg-block")
+      div
+        div(class="msg-block__msg") Welcome Here
+      div
+        div(class="msg-block__msg") I'm Alan Chang
+      div
+        div(class="msg-block__msg") Front-end Engineer | Just For Fun Designer
 </template>
 
 <script>
+
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+
 export default {
   mounted () {
     document.addEventListener('scroll', this.parallax)
+    const landingPageAnim = gsap.timeline({
+      paused: true
+    })
+    let msg = document.querySelectorAll('.msg-block__msg')
+    document.querySelectorAll('.layer').forEach((layer, index) => {
+      if (index === 0) {
+        landingPageAnim.from(layer, {
+          duration: 1,
+          yPercent: 100,
+          ease: 'power4.out'
+        })
+      } else if (index === 9) {
+        /**
+         * For moon animation
+         */
+        landingPageAnim.from(layer, {
+          duration: 1,
+          opacity: 0,
+          y: 200,
+          ease: 'power4.out'
+        }, '-=0.5')
+      } else {
+        landingPageAnim.from(layer, {
+          duration: 1,
+          yPercent: 100,
+          ease: 'power4.out'
+        }, '-=0.85')
+      }
+    })
+    landingPageAnim.from(msg[0], {
+      duration: 0.7,
+      opacity: 0,
+      ease: 'power4.out',
+      y: 30
+    }, '-=0.3')
+      .from(msg[1], {
+        duration: 1.2,
+        ease: 'power4.out',
+        yPercent: 100
+      })
+      .from(msg[2], {
+        duration: 0.7,
+        ease: 'power4.out',
+        xPercent: -100
+      }, '-=0.6')
+    landingPageAnim.play()
   },
   methods: {
     // parallax (e) {
@@ -55,12 +108,12 @@ export default {
   max-width: 100%;
   position: relative;
   overflow: hidden;
-
   .layer {
     position: absolute;
     &1 {
       bottom: -5px;
       z-index: setZindex("layer1");
+      width: clamp(1000px, 100%, 100%);
     }
     &2 {
       bottom: 0px;
@@ -108,7 +161,7 @@ export default {
       z-index: setZindex("layer7");
       width: clamp(1000px, 100vw, 100vw);
     }
-    &__moon {
+    &8 {
       bottom: clamp(300px, 50vw, 65vh);
       right: clamp(50px, 10vw, 500px);
       z-index: setZindex("moon");
@@ -143,21 +196,28 @@ export default {
   //   );
   // }
 }
-.message {
+.msg-block {
   color: setColor(primary);
   font-weight: bold;
   z-index: setZindex("paragraph");
   > div {
     &:nth-child(1) {
       font-size: clamp(1.5rem, 5vw, 2rem);
+      opacity: 0.7;
+      transform: translate3d(0, 10px, 0);
     }
     &:nth-child(2) {
       font-size: 48px;
-      line-height: 36px;
+      font-weight: 800;
+      opacity: 0.8;
+      overflow: hidden;
     }
     &:nth-child(3) {
       font-size: 24px;
       color: setColor(secondary);
+      opacity: 0.7;
+      overflow: hidden;
+      transform: translate3d(0, -10px, 0);
     }
   }
 }

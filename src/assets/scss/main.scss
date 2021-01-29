@@ -26,6 +26,14 @@
   box-sizing: border-box;
   // padding: 60px clamp(120px, 20vw, 400px);
 }
+@mixin pdGeneralHr() {
+  padding: 0px calc((100vw - 1100px) / 2);
+  box-sizing: border-box;
+}
+
+@mixin mgGeneralVt() {
+  margin: 100px 0px;
+}
 html,
 body {
   font-family: "Open Sans", "Noto Sans TC", sans-serif;
@@ -40,8 +48,6 @@ h1 {
   margin: 0;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
-  font-family: "Passion One";
-  // font-family: "Aero";
 }
 
 h2 {
@@ -50,34 +56,19 @@ h2 {
   margin-bottom: 1rem;
 }
 .heading {
-  // margin-left: 80px;
-  // text-align: left;
+  font-size: 5rem;
   position: relative;
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   height: 40%;
-  //   width: 30vw;
-  //   right: 10vh;
-  //   top: 50%;
-  //   overflow: hidden;
-  //   border-left: 2px solid setColor(text-color-light);
-  //   border-bottom: 2px solid setColor(text-color-light);
-  //   transform: translateY(-50%) skew(-20deg);
-  //   transform-origin: 0% 100%;
-  // }
-  // &::before {
-  //   content: "";
-  //   position: absolute;
-  //   height: 40%;
-  //   width: 30vw;
-  //   left: 10vh;
-  //   top: 50%;
-  //   border-right: 2px solid setColor(text-color-light);
-  //   border-top: 2px solid setColor(text-color-light);
-  //   transform: translateY(-50%) skew(-20deg);
-  //   transform-origin: 0% 100%;
-  // }
+  margin-bottom: 100px;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    bottom: -10px;
+    background-color: setColor(text-color);
+    width: 25%;
+    height: 5px;
+  }
 }
 
 .dividor {

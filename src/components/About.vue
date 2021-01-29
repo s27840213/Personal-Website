@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="root")
+  div(class="root-about")
     div(class="left")
       div(class="left__avatar")
       div(class="left__info")
@@ -14,16 +14,67 @@
 </template>
 
 <script>
-export default {
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { CSSRulePlugin } from 'gsap/dist/CSSRulePlugin'
 
+export default {
+  mounted () {
+    const aboutAnim = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.root-about',
+        start: 'center bottom'
+      }
+    })
+    let pseudoHeading = CSSRulePlugin.getRule('.root-about .right__heading::after')
+    console.log(pseudoHeading)
+    aboutAnim.from('.left__avatar', {
+      duration: 1,
+      x: -100,
+      opacity: 0
+    }, 's')
+      .from('.left__zhname', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.left__enname', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.left__job', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.right__heading', {
+        duration: 0.7,
+        opacity: 0,
+        x: 0
+      }, '-=0.5')
+      .from(pseudoHeading, {
+        duration: 0.7,
+        cssRule: { scaleX: 0 }
+      }, '-=0.5')
+      .from('.right__education', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.right__content', {
+        duration: 1,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-.root {
+<style lang="scss">
+.root-about {
+  @include pdGeneralHr;
   width: 100%;
-  margin-top: 200px;
-  padding: 0px 200px;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -32,8 +83,8 @@ export default {
   .left {
     position: relative;
     &__avatar {
-      width: 100%;
-      height: 80vh;
+      width: clamp(300px, 100%, 100%);
+      height: 60vh;
       background-color: gray;
     }
     &__info {
@@ -77,7 +128,7 @@ export default {
         bottom: 0px;
         left: 0px;
         background-color: setColor(text-color);
-        transform: translateX(30%);
+        transform-origin: left;
       }
     }
     &__education {
@@ -89,6 +140,7 @@ export default {
     &__content {
       font-size: 18px;
       color: setColor(text-color);
+      transform: translate3d(10px, 0, 0);
     }
   }
 }

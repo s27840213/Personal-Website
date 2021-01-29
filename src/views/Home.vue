@@ -2,8 +2,11 @@
 div(class="home")
   landing-page
   about
+  passion
   skills
-  portofolio
+  project
+  practice
+  artwork
   contact
 </template>
 
@@ -11,9 +14,13 @@ div(class="home")
 // @ is an alias to /src
 import LandingPage from '@/components/LandingPage.vue'
 import About from '@/components/About.vue'
+import Passion from '@/components/Passion.vue'
 import Skills from '@/components/Skills.vue'
 import Contact from '@/components/Contact.vue'
-import Portofolio from '@/components/Portofolio.vue'
+import Project from '@/components/Project.vue'
+import Practice from '@/components/Practice.vue'
+import Artwork from '@/components/Artwork.vue'
+
 export default {
   name: 'Home',
   components: {
@@ -21,7 +28,10 @@ export default {
     About,
     Skills,
     Contact,
-    Portofolio
+    Project,
+    Passion,
+    Practice,
+    Artwork
   },
   data () {
     return {
@@ -40,5 +50,11 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: setColor(primary);
+  > div::v-deep {
+    margin-bottom: 200px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
 }
 </style>

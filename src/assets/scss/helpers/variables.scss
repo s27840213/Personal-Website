@@ -1,6 +1,8 @@
 $colors: (
   primary: #2d112b,
   secondary: #7e0032,
+  brown: #602b41,
+  red: #ca293e,
   white: #fff,
   black: #0e0314,
   text-color: #fedcc8,
@@ -36,7 +38,8 @@ $linear-gradient: (
 );
 
 $zindex: (
-  "default",
+  "default-1",
+  "default-2",
   "moon",
   "layer7",
   "layer6",
