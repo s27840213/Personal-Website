@@ -4,8 +4,8 @@
       div(class="left__avatar")
       div(class="left__info")
         div(class="left__zhname") Tapei, Taiwan
-        div(class="left__enname") Alan Chang
-        div(class="left__job") - Junior Front-end Developer | Just For Fun Designer -
+        div(class="left__enname") Yu-Chen Chang
+        div(class="left__job") - Junior Front-end Developer | Web Designer -
         //- img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
     div(class="right")
       div(class="right__heading") About Me
@@ -16,20 +16,23 @@
 <script>
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { CSSRulePlugin } from 'gsap/dist/CSSRulePlugin'
-
+import { animatePseudo } from '@/utils/utility.js'
 export default {
+  data () {
+    return {
+      animSpeed: 0.7
+    }
+  },
   mounted () {
     const aboutAnim = gsap.timeline({
       scrollTrigger: {
-        trigger: '.root-about',
-        start: 'center bottom'
+        trigger: '.right__heading',
+        start: 'bottom bottom',
+        markers: true
       }
     })
-    let pseudoHeading = CSSRulePlugin.getRule('.root-about .right__heading::after')
-    console.log(pseudoHeading)
     aboutAnim.from('.left__avatar', {
-      duration: 1,
+      duration: 0.7,
       x: -100,
       opacity: 0
     }, 's')
@@ -51,19 +54,21 @@ export default {
       .from('.right__heading', {
         duration: 0.7,
         opacity: 0,
-        x: 0
+        x: 0,
+        onStart: animatePseudo,
+        onStartParams: ['.right__heading']
       }, '-=0.5')
-      .from(pseudoHeading, {
-        duration: 0.7,
-        cssRule: { scaleX: 0 }
-      }, '-=0.5')
+      // .from(pseudoHeading, {
+      //   duration: 0.7,
+      //   cssRule: { x: -100 }
+      // }, '-=0.5')
       .from('.right__education', {
         duration: 0.7,
         opacity: 0,
         x: -50
       }, '-=0.5')
       .from('.right__content', {
-        duration: 1,
+        duration: 0.7,
         opacity: 0,
         x: -50
       }, '-=0.5')
@@ -85,7 +90,23 @@ export default {
     &__avatar {
       width: clamp(300px, 100%, 100%);
       height: 60vh;
-      background-color: gray;
+      box-sizing: border-box;
+      clip-path: polygon(
+        100% 0%,
+        90% 50%,
+        100% 100%,
+        25% 100%,
+        15% 50%,
+        25% 0%
+      );
+      background-image: linear-gradient(
+          to top,
+          setColor(primary) 0%,
+          rgba(255, 255, 255, 0) 50%
+        ),
+        url("~@/assets/img/me.jpg");
+      background-position: center;
+      background-size: cover;
     }
     &__info {
       position: absolute;
@@ -96,13 +117,15 @@ export default {
       > div {
         &:nth-child(1) {
           font-size: 24px;
-          text-shadow: 2px 2px 10px rgba(black, 0.5);
+          text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
         }
         &:nth-child(2) {
-          font-size: 48px;
+          font-size: 40px;
+          text-shadow: 4px 4px 0px rgba(setColor(secondary), 0.8);
         }
         &:nth-child(3) {
           font-size: 16px;
+          text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
         }
       }
     }
@@ -123,12 +146,17 @@ export default {
       &::after {
         content: "";
         position: absolute;
-        width: 80%;
+        width: 0px;
         height: 5px;
         bottom: 0px;
         left: 0px;
         background-color: setColor(text-color);
         transform-origin: left;
+        transition: 1s;
+      }
+      &.animatePseudo::after {
+        transition-delay: 0.5s;
+        width: 80%;
       }
     }
     &__education {

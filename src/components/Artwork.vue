@@ -1,29 +1,86 @@
 <template lang="pug">
-  div(class="root-artwork")
-    h1(class="heading") Artwork
-    div(class="artwork")
+  div(class="artwork")
+    h1(class="artwork__heading") Artwork
+    div(class="creation")
+      div
+        img(class="creation__img" :src="require('@/assets/artwork/creation/soc.png')")
+        img(class="creation__img" :src="require('@/assets/artwork/creation/lebron.png')")
+        img(class="creation__img" :src="require('@/assets/artwork/creation/oblogo.png')")
+        img(class="creation__img" :src="require('@/assets/artwork/creation/obposter.png')")
+        img(class="creation__img" :src="require('@/assets/artwork/creation/poster.png')")
+        img(class="creation__img" :src="require('@/assets/artwork/creation/annie.png')")
     h2(class="sub-heading") Isometric Building
     div(class="iso-building")
-      div(class="button button__left")
+      div(class="button button__prev")
       div(class="iso-building__img-section")
         img(class="iso-building__img")
       div(class="iso-building__info-section")
         div(class="iso-building__location") Taipei, Taiwan
         div(class="iso-building__name") Ngational Palace Museum
-      div(class="button button__right")
+      div(class="button button__next")
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { animatePseudo } from '@/utils/utility.js'
 export default {
-
+  data () {
+    return {
+      animSpeed: 0.7
+    }
+  },
+  mounted () {
+    const artworkAnim = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.artwork__heading',
+        start: 'top bottom',
+        markers: true
+      }
+    }).from('.artwork__heading', {
+      duration: this.animSpeed,
+      y: 100,
+      opacity: 0,
+      onStart: animatePseudo,
+      onStartParams: ['.artwork__heading']
+    })
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.root-artwork {
-  .artwork {
+.artwork {
+  &__heading {
+    @include heading;
+    &.animatePseudo::after {
+      transition-delay: 0.25s;
+      width: 25%;
+    }
+  }
+  .creation {
     background: setColor(brown);
-    height: 600px;
+    height: 500px;
+    overflow: hidden;
+    > div:nth-child(1) {
+      height: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      padding: 50px 0px;
+      box-sizing: border-box;
+      animation: demo 15s linear infinite;
+    }
+    &__img {
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      margin: 0px 20px;
+      box-shadow: -5px -5px 10px setColor(black, 0.3),
+        5px 5px 10px setColor(black, 0.7);
+      transition: 0.5s ease-out;
+      &:hover {
+        transform: translateY(-15px);
+      }
+    }
   }
   .sub-heading {
     font-size: 64px;
@@ -95,11 +152,11 @@ export default {
   }
   .button {
     background-color: white;
-    &__left {
+    &__prev {
       @include size(50px);
       transform: translate3d(-60px, 0, 0);
     }
-    &__right {
+    &__next {
       @include size(50px);
       transform: translate3d(60px, 0, 0);
     }

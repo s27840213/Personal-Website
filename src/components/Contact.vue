@@ -21,19 +21,21 @@ export default {
 
 <style lang="scss" scoped>
 .root-contact {
-  width: 100%;
   background-color: setColor(brown);
   padding-bottom: 100px;
   position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 10px;
-    bottom: 0;
-    left: 0;
-    background-color: setColor(text-color);
-  }
+  box-sizing: border-box;
+  margin: 100px;
+  border-radius: 20px;
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 10px;
+  //   bottom: 0;
+  //   left: 0;
+  //   background-color: setColor(text-color);
+  // }
   .heading {
     margin-bottom: 50px;
   }

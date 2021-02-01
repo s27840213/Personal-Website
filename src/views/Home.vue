@@ -5,7 +5,7 @@ div(class="home")
   passion
   skills
   project
-  practice
+  //- practice
   artwork
   contact
 </template>
@@ -52,9 +52,6 @@ export default {
   background-color: setColor(primary);
   > div::v-deep {
     margin-bottom: 200px;
-    &:last-child {
-      margin-bottom: 0px;
-    }
   }
 }
 </style>

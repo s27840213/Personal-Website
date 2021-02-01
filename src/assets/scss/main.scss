@@ -34,28 +34,8 @@
 @mixin mgGeneralVt() {
   margin: 100px 0px;
 }
-html,
-body {
-  font-family: "Open Sans", "Noto Sans TC", sans-serif;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 
-h1 {
-  font-size: 3rem;
-  margin: 0;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-  margin: 0px;
-  margin-bottom: 1rem;
-}
-.heading {
+@mixin heading {
   font-size: 5rem;
   position: relative;
   margin-bottom: 100px;
@@ -66,9 +46,24 @@ h2 {
     transform: translate3d(-50%, 0, 0);
     bottom: -10px;
     background-color: setColor(text-color);
-    width: 25%;
+    width: 0px;
     height: 5px;
+    transition: 1s;
   }
+}
+html,
+body {
+  font-family: "Open Sans", "Noto Sans TC", sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 0px;
+  margin-bottom: 1rem;
 }
 
 .dividor {

@@ -16,7 +16,7 @@
       div
         div(class="msg-block__msg") I'm Alan Chang
       div
-        div(class="msg-block__msg") Front-end Engineer | Just For Fun Designer
+        div(class="msg-block__msg") Front-end Engineer | Web Designer
 </template>
 
 <script>
