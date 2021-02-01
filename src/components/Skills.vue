@@ -40,7 +40,8 @@ export default {
       scrollTrigger: {
         trigger: '.skill__heading',
         start: 'top bottom',
-        markers: true
+        markers: true,
+        autoRemoveChildren: true
       }
     }).from('.skill__heading', {
       duration: this.animSpeed,
@@ -51,7 +52,6 @@ export default {
     })
     skillAnim1.add(this.animateProgramming())
     this.animateDesign()
-    // skillAnim1.add(this.animateDesign())
   },
   methods: {
     animateProgramming () {

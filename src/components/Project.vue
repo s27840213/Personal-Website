@@ -13,9 +13,9 @@
         div(class="project-1__description")  Passionate about coding with motion graphic design. Like to learning  new technologies to sharpen my programming skills. I’m currently work as an front-end.
         div(class="project-1__button")
           span more info
-      div(class="project-1__img")
+      div(class="tilt-target project-1__img")
     div(class="project-2")
-      div(class="project-2__img")
+      div(class="tilt-target project-2__img")
       div
         div(class="project-2__task") UI, Animation, Front-end
         div(class="project-2__name") Telecan
@@ -34,6 +34,8 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { animatePseudo } from '@/utils/utility.js'
+import VanillaTilt from 'vanilla-tilt'
+
 export default {
   data () {
     return {
@@ -66,6 +68,12 @@ export default {
       y: 200,
       opacity: 0
     })
+
+    VanillaTilt.init(document.querySelectorAll('.tilt-target'), {
+      max: 5,
+      reverse: true,
+      speed: 400
+    })
   },
   methods: {
     animProject1 () {
@@ -73,7 +81,7 @@ export default {
         scrollTrigger: {
           trigger: '.project-1',
           start: 'center bottom',
-          markers: true
+          autoRemoveChildren: true
         }
       })
         .from('.project-1__img', {
@@ -83,12 +91,12 @@ export default {
         })
         .from('.project-1__task', {
           duration: this.animSpeed,
-          x: 100,
+          x: -100,
           opacity: 0
         }, '-=0.5')
         .from('.project-1__name', {
           duration: this.animSpeed,
-          x: 100,
+          x: -100,
           opacity: 0
         }, '-=0.5')
         .from('.project-1__media', {
@@ -112,7 +120,8 @@ export default {
         scrollTrigger: {
           trigger: '.project-2',
           start: 'center bottom',
-          markers: true
+          markers: true,
+          autoRemoveChildren: true
         }
       })
         .from('.project-2__img', {
@@ -122,12 +131,12 @@ export default {
         })
         .from('.project-2__task', {
           duration: this.animSpeed,
-          x: -100,
+          x: 100,
           opacity: 0
         }, '-=0.5')
         .from('.project-2__name', {
           duration: this.animSpeed,
-          x: -100,
+          x: 100,
           opacity: 0
         }, '-=0.5')
         .from('.project-2__description', {
@@ -185,6 +194,8 @@ export default {
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
       &:hover {
         transform: scale(1.1);
       }
@@ -195,7 +206,7 @@ export default {
         right: 0;
         font-size: 96px;
         font-weight: bold;
-        transform: translate3d(50%, 50%, 0);
+        transform: translate3d(50%, 50%, 20px);
       }
     }
     &__task {
@@ -268,6 +279,8 @@ export default {
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
       &:hover {
         transform: scale(1.1);
       }
@@ -278,7 +291,7 @@ export default {
         left: 0;
         font-size: 96px;
         font-weight: bold;
-        transform: translate3d(-50%, 50%, 0);
+        transform: translate3d(-50%, 50%, 20px);
       }
     }
     &__task {

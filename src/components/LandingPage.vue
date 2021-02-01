@@ -28,7 +28,8 @@ export default {
   mounted () {
     document.addEventListener('scroll', this.parallax)
     const landingPageAnim = gsap.timeline({
-      paused: true
+      paused: true,
+      autoRemoveChildren: true
     })
     let msg = document.querySelectorAll('.msg-block__msg')
     document.querySelectorAll('.layer').forEach((layer, index) => {
@@ -89,8 +90,12 @@ export default {
         const speed = layer.getAttribute('data-speed')
         const height = document.querySelector('.landing-page').offsetHeight
         // const x = (window.innerWidth - e.pageX * speed) / 200
-        layer.style.transform = `translateY(${scroll * speed / 15}px)`
-        layer.style.opacity = 1 - (scroll / height) * (speed / 7) * (7 / 10)
+        gsap.to(layer, {
+          y: scroll * speed / 15
+          // opacity: 1 - (scroll / height) * (speed / 7) * (7 / 10)
+        })
+        // layer.style.transform = `translateY(${scroll * speed / 15}px)`
+        // layer.style.opacity = 1 - (scroll / height) * (speed / 7) * (7 / 10)
         // layer.style.transform = `translateX(${x}px) translateY(${y}px)`
       })
     }

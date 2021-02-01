@@ -21,7 +21,7 @@ export default {
       scrollTrigger: {
         trigger: '.practice__heading',
         start: 'top bottom',
-        markers: true
+        autoRemoveChildren: true
       }
     }).from('.practice__heading', {
       duration: this.animSpeed,

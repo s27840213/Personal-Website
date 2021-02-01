@@ -2,32 +2,39 @@
   div(class="artwork")
     h1(class="artwork__heading") Artwork
     div(class="creation")
-      div
+      div(class="creation__demo")
+        img(class="creation__img" :src="require('@/assets/artwork/creation/oblogo.png')")
         img(class="creation__img" :src="require('@/assets/artwork/creation/soc.png')")
         img(class="creation__img" :src="require('@/assets/artwork/creation/lebron.png')")
-        img(class="creation__img" :src="require('@/assets/artwork/creation/oblogo.png')")
         img(class="creation__img" :src="require('@/assets/artwork/creation/obposter.png')")
         img(class="creation__img" :src="require('@/assets/artwork/creation/poster.png')")
         img(class="creation__img" :src="require('@/assets/artwork/creation/annie.png')")
     h2(class="sub-heading") Isometric Building
     div(class="iso-building")
-      div(class="button button__prev")
+      div(class="button button__prev" @click="prev")
       div(class="iso-building__img-section")
-        img(class="iso-building__img")
+        img(class="iso-building__img" :src="require(`@/assets/artwork/isometric/${buildingInfo[currIndex].img}`)")
       div(class="iso-building__info-section")
-        div(class="iso-building__location") Taipei, Taiwan
-        div(class="iso-building__name") Ngational Palace Museum
-      div(class="button button__next")
+        div(class="iso-building__location") {{buildingInfo[currIndex].location}}
+        div(class="iso-building__name") {{buildingInfo[currIndex].name}}
+      div(class="button button__next" @click="next")
+    div(class="iso-building__dot" v-for="index in buildingInfo.length" :style="{'opacity': index-1 === currIndex ? 1: 0.4}" @click="jumpTo(index)")
 </template>
 
 <script>
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { animatePseudo } from '@/utils/utility.js'
+import VanillaTilt from 'vanilla-tilt'
+
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      animSpeed: 0.7
+      animSpeed: 0.7,
+      currIndex: 0,
+      isoAnim: null,
+      isAnimating: false
     }
   },
   mounted () {
@@ -44,6 +51,118 @@ export default {
       onStart: animatePseudo,
       onStartParams: ['.artwork__heading']
     })
+
+    const demoAnim = gsap.to('.creation__demo', {
+      scrollTrigger: {
+        trigger: '.creation__demo',
+        start: 'bottom bottom',
+        end: 'bottom top',
+        scrub: 1
+      },
+      xPercent: -50
+    })
+    this.isoAnim = this.isoAnimation()
+
+    // handle tilt animation
+
+    VanillaTilt.init(document.querySelectorAll('.creation__img'), {
+      max: 10,
+      speed: 600,
+      scale: 1.05
+    })
+
+    VanillaTilt.init(document.querySelectorAll('.iso-building__img-section'), {
+      max: 10,
+      speed: 600,
+      scale: 1.05
+    })
+  },
+  computed: {
+    ...mapState({
+      buildingInfo: 'buildingInfo'
+    })
+  },
+  methods: {
+    isoAnimation () {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.iso-building__img-section',
+          start: 'top bottom',
+          markers: true
+        }
+      })
+        .from('.iso-building__img-section', {
+          duration: this.animSpeed,
+          scale: 0,
+          opacity: 0,
+          ease: 'power4.out',
+          onStart: () => { this.isAnimating = true }
+        })
+        .from('.iso-building__img', {
+          duration: this.animSpeed * 1.5,
+          scale: 0,
+          opacity: 0,
+          ease: 'power4.out'
+        }, '-=0.3')
+        .from('.iso-building__location', {
+          duration: this.animSpeed,
+          x: -200,
+          opacity: 0,
+          ease: 'power4.out'
+        }, '-=0.6')
+        .from('.iso-building__name', {
+          duration: this.animSpeed,
+          x: -200,
+          opacity: 0,
+          ease: 'power4.out',
+          onComplete: () => { this.isAnimating = false }
+        }, '-=0.3')
+      return tl
+    },
+    switchIso (direction) {
+      let delta = direction === 'next' ? 200 : -200
+      this.isoAnim
+        .from('.iso-building__img', {
+          duration: this.animSpeed * 1.5,
+          opacity: 0,
+          x: -delta,
+          ease: 'power4.out',
+          onStart: () => { this.isAnimating = true }
+        })
+        .from('.iso-building__location', {
+          duration: this.animSpeed * 0.7,
+          x: -200,
+          opacity: 0,
+          ease: 'power4.out'
+        }, '-=0.6')
+        .from('.iso-building__name', {
+          duration: this.animSpeed * 0.7,
+          x: -200,
+          opacity: 0,
+          ease: 'power4.out',
+          onComplete: () => { this.isAnimating = false }
+        }, '-=0.3')
+    },
+    next () {
+      if (!this.isAnimating) {
+        this.switchIso('next')
+        this.currIndex = (this.currIndex + 1) % (this.buildingInfo.length)
+      }
+    },
+    prev () {
+      if (!this.isAnimating) {
+        this.switchIso('prev')
+        this.currIndex - 1 < 0 ? this.currIndex = this.buildingInfo.length - 1 : this.currIndex -= 1
+      }
+    },
+    jumpTo (index) {
+      if (!this.isAnimating) {
+        if (index - 1 !== this.currIndex) {
+          index - 1 > this.currIndex ? this.switchIso('next') : this.switchIso('prev')
+          this.currIndex = index - 1
+        }
+      }
+    }
   }
 }
 </script>
@@ -110,6 +229,8 @@ export default {
       @include size(400px);
       background-color: setColor(secondary);
       position: relative;
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
       &::after {
         content: "";
         @include size(100%);
@@ -120,6 +241,14 @@ export default {
         box-sizing: border-box;
         transform: scale(1.05);
       }
+    }
+    &__img {
+      width: 100%;
+      padding: 20px;
+      transform: translateZ(20px);
+      box-sizing: border-box;
+      object-fit: contain;
+      filter: drop-shadow(0px 15px 10px setColor(primary, 0.6));
     }
     &__info-section {
       display: flex;
@@ -133,7 +262,7 @@ export default {
       font-size: 2rem;
     }
     &__name {
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: bold;
       text-align: left;
       position: relative;
@@ -145,9 +274,17 @@ export default {
         left: 0px;
         transform: translate3d(-50%, 0, 0);
         height: 10px;
-        width: 20%;
+        width: 100px;
         background-color: setColor(text-color);
       }
+    }
+    &__dot {
+      @include size(10px);
+      border-radius: 50%;
+      background-color: white;
+      display: inline-block;
+      margin: 40px 5px;
+      transition: 0.5s;
     }
   }
   .button {

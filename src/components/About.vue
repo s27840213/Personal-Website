@@ -17,6 +17,7 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { animatePseudo } from '@/utils/utility.js'
+import VanillaTilt from 'vanilla-tilt'
 export default {
   data () {
     return {
@@ -28,8 +29,9 @@ export default {
       scrollTrigger: {
         trigger: '.right__heading',
         start: 'bottom bottom',
-        markers: true
+        autoRemoveChildren: true
       }
+
     })
     aboutAnim.from('.left__avatar', {
       duration: 0.7,
@@ -58,10 +60,6 @@ export default {
         onStart: animatePseudo,
         onStartParams: ['.right__heading']
       }, '-=0.5')
-      // .from(pseudoHeading, {
-      //   duration: 0.7,
-      //   cssRule: { x: -100 }
-      // }, '-=0.5')
       .from('.right__education', {
         duration: 0.7,
         opacity: 0,
@@ -72,6 +70,11 @@ export default {
         opacity: 0,
         x: -50
       }, '-=0.5')
+    VanillaTilt.init(document.querySelectorAll('.left'), {
+      max: 5,
+      speed: 1000,
+      scale: 1.05
+    })
   }
 }
 </script>
@@ -87,6 +90,8 @@ export default {
   grid-gap: 80px;
   .left {
     position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
     &__avatar {
       width: clamp(300px, 100%, 100%);
       height: 60vh;
@@ -114,6 +119,8 @@ export default {
       right: -32px;
       text-align: right;
       font-weight: bold;
+      transform: translate3d(0, 0, 20px);
+
       > div {
         &:nth-child(1) {
           font-size: 24px;

@@ -14,8 +14,15 @@
 </template>
 
 <script>
-export default {
+import VanillaTilt from 'vanilla-tilt'
 
+export default {
+  mounted () {
+    VanillaTilt.init(document.querySelectorAll('.root-contact'), {
+      max: 2,
+      speed: 200
+    })
+  }
 }
 </script>
 
