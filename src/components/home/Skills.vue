@@ -8,13 +8,15 @@
         h2(class="programming__title") Programmer
         div(class="programming__description") A Front End Developer who focus on writing clean, elegant and efficient code
         div(class="programming__skill")
-          tool-wrapper(class="programming__tool" v-for="i in 10" :key="`tool-${i}`" :fontSize="16" :icon="'sass'" toolName="Photoshop")
+          div(class="tool programming__tool" v-for="skill in skillMain") {{skill}}
+          //- tool-wrapper(class="programming__tool" v-for="i in 10" :key="`tool-${i}`" :fontSize="16" :icon="'sass'" toolName="Photoshop")
     div(class="design")
       div
         h2(class="design__title") Designer
         div(class="design__description") A Designer with a passion for creating beatiful and intriguing artworks
         div(class="design__skill")
-          tool-wrapper(class="design__tool" v-for="i in 10" :key="`tool-${i}`" :fontSize="16" :icon="'sass'" toolName="Photoshop")
+          div(class="tool design__tool" v-for="skill in skillDesign") {{skill}}
+          //- tool-wrapper(class="design__tool" v-for="i in 10" :key="`tool-${i}`" :fontSize="16" :icon="'sass'" toolName="Photoshop")
       div(class="design__img")
         img(:src="require('@/assets/img/designer4.svg')")
 </template>
@@ -31,7 +33,9 @@ export default {
   },
   data () {
     return {
-      skillMain: [''],
+      skillMain: ['HTML/Pug', 'CSS / SASS/ SCSS', 'Python', 'Vue / Vuex / Vue-router / Vue-Cli', 'Javascript', 'GSAP', 'Ajax (axios)', 'RWD'],
+      skillOther: ['C/C++/C#', 'Java', 'jQuery', 'Webpack', 'Echart.js/Canvas', 'Unity', 'Phaser.js'],
+      skillDesign: ['Photoshop', 'Illustrator', 'After Effect', 'Figma', 'Adobe XD', 'Texture Packer', 'Eagle'],
       animSpeed: 0.7
     }
   },
@@ -126,13 +130,13 @@ export default {
     }
   }
   .programming {
+    @include pdGeneralHr;
     width: 100%;
     text-align: left;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     column-gap: clamp(30px, 10vh, 150px);
-    @include pdGeneralHr;
     &__img {
       display: flex;
       width: 100%;
@@ -164,17 +168,12 @@ export default {
     &__skill {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
       align-items: center;
-      .toolwrapper::v-deep {
-        margin: 10px;
-        color: setColor(text-color-light, 1);
-      }
     }
   }
   .design {
     width: 100%;
-    text-align: right;
+    text-align: left;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -211,12 +210,25 @@ export default {
     &__skill {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
       align-items: center;
       .toolwrapper::v-deep {
         margin: 10px;
         color: setColor(text-color-light, 1);
       }
+    }
+  }
+
+  .tool {
+    color: setColor(text-color);
+    border: 1px solid setColor(text-color);
+    padding: 5px 15px;
+    margin: 5px 10px;
+    border-radius: 40px;
+    transition: background-color 0.4s, color 0.3s;
+    cursor: pointer;
+    &:hover {
+      background-color: setColor(text-color);
+      color: setColor(primary);
     }
   }
 }

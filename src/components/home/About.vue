@@ -96,14 +96,14 @@ export default {
       width: clamp(300px, 100%, 100%);
       height: 60vh;
       box-sizing: border-box;
-      // clip-path: polygon(
-      //   100% 0%,
-      //   90% 50%,
-      //   100% 100%,
-      //   25% 100%,
-      //   15% 50%,
-      //   25% 0%
-      // );
+      clip-path: polygon(
+        100% 0%,
+        90% 50%,
+        100% 100%,
+        25% 100%,
+        15% 50%,
+        25% 0%
+      );
       background-image: linear-gradient(
           to top,
           setColor(primary) 0%,
@@ -167,7 +167,7 @@ export default {
       }
     }
     &__education {
-      font-size: 28px;
+      font-size: 24px;
       margin: 10px 0px;
       color: setColor(text-color);
       font-weight: 600;

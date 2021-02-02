@@ -61,15 +61,35 @@ export default new Vuex.Store({
         location: 'Penghu, Taiwan',
         img: 'twinStonesHeart.png'
       },
-      {
-        name: 'Longshan Temple',
-        location: 'Taipei, Taiwan',
-        img: 'longshanTemple.png'
-      },
+      // {
+      //   name: 'Longshan Temple',
+      //   location: 'Taipei, Taiwan',
+      //   img: 'longshanTemple.png'
+      // },
       {
         name: 'Xiaojiang Pavilion',
         location: 'Hsinchu, Taiwan',
         img: 'xiaojiangPavilion.png'
+      }
+    ],
+    projectInfo: [
+      {
+        name: 'Kyronus',
+        task: 'UI, Illustration, Front-end',
+        media: ['fb', 'ig'],
+        description: 'Kyronus is a simulation mobile game which connects  to the real world with Gamification. Kyronus allows players to collect and build those famous tourist attractions in Taiwan on their own planet! We hope Kyronus could enhance player’s understanding  of the local culture of Taiwan .',
+        button: 'more info',
+        buttonCallback: null,
+        cover: 'kyronus.png'
+      },
+      {
+        name: 'Telecan',
+        task: 'UI, Front-end',
+        media: null,
+        description: 'Telecan is a project which was nominated in the 2020 Ustart. It use image recognition technology to record the data of trash in certain place. My friend and I just do the freelance work for them to create the website. My friend was responsible for the back-end, and I was responsible for the front-end',
+        button: 'visit site',
+        buttonCallback: null,
+        cover: 'telecan.png'
       }
     ]
   },

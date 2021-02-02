@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
 @font-face {
   font-family: "Aero";
   src: url("~@/assets/font/Aero.ttf");
@@ -50,6 +50,13 @@
     height: 5px;
     transition: 1s;
   }
+}
+@mixin glass($br: 10px) {
+  background-color: setColor(secondary, 0.6);
+  border-left: 2px solid setColor(white, 0.3);
+  border-top: 2px solid setColor(white, 0.3);
+  box-shadow: 2px 2px 5px setColor(black, 0.7);
+  border-radius: $br;
 }
 html,
 body {

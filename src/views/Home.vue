@@ -12,14 +12,14 @@ div(class="home")
 
 <script>
 // @ is an alias to /src
-import LandingPage from '@/components/LandingPage.vue'
-import About from '@/components/About.vue'
-import Passion from '@/components/Passion.vue'
-import Skills from '@/components/Skills.vue'
-import Contact from '@/components/Contact.vue'
-import Project from '@/components/Project.vue'
-import Practice from '@/components/Practice.vue'
-import Artwork from '@/components/Artwork.vue'
+import LandingPage from '@/components/home/LandingPage.vue'
+import About from '@/components/home/About.vue'
+import Passion from '@/components/home/Passion.vue'
+import Skills from '@/components/home/Skills.vue'
+import Contact from '@/components/home/Contact.vue'
+import Project from '@/components/home/Project.vue'
+import Practice from '@/components/home/Practice.vue'
+import Artwork from '@/components/home/Artwork.vue'
 
 export default {
   name: 'Home',
