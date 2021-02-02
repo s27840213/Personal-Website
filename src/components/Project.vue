@@ -238,6 +238,7 @@ export default {
       box-sizing: border-box;
       color: setColor(text-color);
       text-align: left;
+      line-height: 200%;
     }
     &__button {
       display: inline-block;
@@ -316,6 +317,7 @@ export default {
       margin: 20px 0px;
       box-sizing: border-box;
       color: setColor(text-color);
+      line-height: 200%;
     }
     &__button {
       display: inline-block;

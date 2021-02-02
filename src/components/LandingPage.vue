@@ -219,7 +219,7 @@ export default {
     }
     &:nth-child(3) {
       font-size: 24px;
-      color: setColor(secondary);
+      color: setColor(red);
       opacity: 0.7;
       overflow: hidden;
       transform: translate3d(0, -10px, 0);

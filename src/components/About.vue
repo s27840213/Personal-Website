@@ -96,14 +96,14 @@ export default {
       width: clamp(300px, 100%, 100%);
       height: 60vh;
       box-sizing: border-box;
-      clip-path: polygon(
-        100% 0%,
-        90% 50%,
-        100% 100%,
-        25% 100%,
-        15% 50%,
-        25% 0%
-      );
+      // clip-path: polygon(
+      //   100% 0%,
+      //   90% 50%,
+      //   100% 100%,
+      //   25% 100%,
+      //   15% 50%,
+      //   25% 0%
+      // );
       background-image: linear-gradient(
           to top,
           setColor(primary) 0%,
@@ -173,9 +173,10 @@ export default {
       font-weight: 600;
     }
     &__content {
-      font-size: 18px;
+      font-size: 16px;
       color: setColor(text-color);
       transform: translate3d(10px, 0, 0);
+      line-height: 200%;
     }
   }
 }

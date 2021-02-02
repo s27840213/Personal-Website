@@ -159,6 +159,7 @@ export default {
       padding-right: clamp(20px, 5vw, 50px);
       font-weight: bold;
       color: setColor(text-color);
+      line-height: 200%;
     }
     &__skill {
       display: flex;
@@ -205,6 +206,7 @@ export default {
       padding-left: clamp(20px, 5vw, 50px);
       font-weight: bold;
       color: setColor(text-color);
+      line-height: 200%;
     }
     &__skill {
       display: flex;
