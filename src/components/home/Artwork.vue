@@ -166,7 +166,6 @@ export default {
       @include glass;
       align-items: center;
       position: relative;
-      border-radius: 10px;
       padding: 20px;
       transform-style: preserve-3d;
       transform: perspective(1000px);
