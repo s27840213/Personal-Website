@@ -33,7 +33,13 @@ export default {
   position: relative;
   box-sizing: border-box;
   margin: 100px;
-  border-radius: 20px;
+  border-radius: 15px;
+  background-color: rgba(white, 0.1);
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  overflow: hidden;
   // &::after {
   //   content: "";
   //   position: absolute;

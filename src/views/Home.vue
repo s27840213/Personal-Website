@@ -2,7 +2,7 @@
 div(class="home")
   landing-page
   about
-  passion
+  //- passion
   skills
   project
   //- practice

@@ -177,6 +177,9 @@ export default {
     grid-template-columns: 1fr 1.3fr;
     column-gap: 30px;
     text-align: right;
+    background-color: setColor(secondary, 0.3);
+    background-image: url("~@/assets/img/grids.png");
+    margin-bottom: 100px;
     > div:nth-child(1) {
       z-index: setZindex(default-2);
     }
@@ -266,6 +269,8 @@ export default {
     grid-template-columns: 1.3fr 1fr;
     column-gap: 30px;
     text-align: left;
+    background-color: setColor(secondary, 0.4);
+    background-image: url("~@/assets/img/grids.png");
     &__img {
       @include size(100%, 0);
       padding-top: 62%;
