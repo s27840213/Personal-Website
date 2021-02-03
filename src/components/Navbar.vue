@@ -1,6 +1,6 @@
 <template lang="pug">
   //- div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color' : atTop ? '#0f252f' : 'transparent' , 'color' : atTop ? 'white' : 'white'}")
-  div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color':'#0f252f', 'color' : atTop ? 'white' : 'white'}")
+  div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color' : atTop ? '#0f252f' : 'transparent', 'color' : atTop ? 'white' : 'white'}")
     div(class="navbar__item" v-for="item in navList "
       @click="switchMenu(item)")
       div(class="navbar__icon")
@@ -63,7 +63,7 @@ export default {
     margin-right: 10px;
   }
   &__item {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 0 20px;
     cursor: pointer;
     @include flexCenter;

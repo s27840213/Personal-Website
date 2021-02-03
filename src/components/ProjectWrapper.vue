@@ -1,12 +1,12 @@
 <template lang="pug">
   div(class="project-wrapper")
-    div(class="tilt-target project-wrapper__img" :style="{'background-image': `url(${mapProjectImg()})`}")
+    div(class="tilt-targetProject project-wrapper__img" :style="{'background-image': `url(${mapProjectImg()})`}")
       div(class="project-wrapper__index") 0{{index+1}}
     div
       div(class="project-wrapper__task") {{projectInfo.task}}
       div(class="project-wrapper__name") {{projectInfo.name}}
       div(v-if="projectInfo.media !== null" class="project-wrapper__media")
-        a(v-for="media in projectInfo.media" href="#" target="blank")
+        a(v-for="media in projectInfo.media" href="#" targetProject="blank")
           img(class="project-wrapper__icon" :src="require(`@/assets/icon/${media}.svg`)")
       div(class="project-wrapper__description")  {{projectInfo.description}}
       div(class="project-wrapper__button")
@@ -36,20 +36,20 @@ export default {
       return require(`@/assets/img/${this.projectInfo.cover}`)
     },
     animProject () {
-      const target = document.querySelectorAll('.project-wrapper')[this.index]
+      const targetProject = document.querySelectorAll('.project-wrapper')[this.index]
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: target,
+          trigger: targetProject,
           start: 'center bottom',
           autoRemoveChildren: true
         }
       })
-        .from(target.querySelector('.project-wrapper__img'), {
+        .from(targetProject.querySelector('.project-wrapper__img'), {
           duration: this.animSpeed,
           x: 100,
           opacity: 0,
           onComplete: () => {
-            VanillaTilt.init(target.querySelector('.project-wrapper__img'), {
+            VanillaTilt.init(targetProject.querySelector('.project-wrapper__img'), {
               max: 5,
               reverse: true,
               speed: 400,
@@ -57,32 +57,32 @@ export default {
             })
           }
         })
-        .from(target.querySelector('.project-wrapper__index'), {
+        .from(targetProject.querySelector('.project-wrapper__index'), {
           duration: this.animSpeed,
           x: 100,
           opacity: 0
         }, '-=0.5')
-        .from(target.querySelector('.project-wrapper__task'), {
+        .from(targetProject.querySelector('.project-wrapper__task'), {
           duration: this.animSpeed,
           x: -100,
           opacity: 0
         }, '-=0.5')
-        .from(target.querySelector('.project-wrapper__name'), {
+        .from(targetProject.querySelector('.project-wrapper__name'), {
           duration: this.animSpeed,
           x: -100,
           opacity: 0
         }, '-=0.5')
-        .from(target.querySelector('.project-wrapper__media'), {
+        .from(targetProject.querySelector('.project-wrapper__media'), {
           duration: this.animSpeed,
           x: 100,
           opacity: 0
         }, '-=0.5')
-        .from(target.querySelector('.project-wrapper__description'), {
+        .from(targetProject.querySelector('.project-wrapper__description'), {
           duration: this.animSpeed,
           x: 100,
           opacity: 0
         }, '-=0.5')
-        .from(target.querySelector('.project-wrapper__button'), {
+        .from(targetProject.querySelector('.project-wrapper__button'), {
           duration: this.animSpeed,
           x: 100,
           opacity: 0

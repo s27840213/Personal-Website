@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="skill")
-    h1(class="skill__heading") Skill Set
+    h1(class="skill__heading") Skill Set(重作ing)
     div(class="programming")
       div(class="programming__img")
         img(:src="require('@/assets/img/designer4.svg')")
@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      skillMain: ['HTML/Pug', 'CSS / SASS/ SCSS', 'Python', 'Vue / Vuex / Vue-router / Vue-Cli', 'Javascript', 'GSAP', 'Ajax (axios)', 'RWD'],
+      skillMain: ['HTML/Pug', 'CSS / SASS/ SCSS', 'Python', 'Vue / Vuex / Vue-router / Vue-Cli', 'Javascript', 'GSAP', 'Ajax (axios)', 'RWD', 'C/C++/C#', 'Java', 'jQuery', 'Webpack', 'Echart.js/Canvas', 'Unity', 'node.js'],
       skillOther: ['C/C++/C#', 'Java', 'jQuery', 'Webpack', 'Echart.js/Canvas', 'Unity', 'Phaser.js'],
       skillDesign: ['Photoshop', 'Illustrator', 'After Effect', 'Figma', 'Adobe XD', 'Texture Packer', 'Eagle'],
       animSpeed: 0.7
@@ -173,7 +173,7 @@ export default {
   }
   .design {
     width: 100%;
-    text-align: left;
+    text-align: right;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;

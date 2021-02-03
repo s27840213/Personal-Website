@@ -33,7 +33,8 @@ export default {
       scrollTrigger: {
         trigger: '.project__heading',
         start: 'top bottom',
-        markers: true
+        markers: true,
+        autoRemoveChildren: true
       }
     }).from('.project__heading', {
       duration: this.animSpeed,
@@ -42,59 +43,26 @@ export default {
       onStart: animatePseudo,
       onStartParams: ['.project__heading']
     })
-  },
-  methods: {
-    animProject1 () {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.project-1',
-          start: 'center bottom',
-          autoRemoveChildren: true
-        }
-      })
-        .from('.project-1__img', {
-          duration: this.animSpeed,
-          x: 100,
-          opacity: 0,
-          onComplete: () => {
-            VanillaTilt.init(document.querySelectorAll('.project-1__img'), {
-              max: 5,
-              reverse: true,
-              speed: 400
-            })
-          }
-        })
-        .from('.project-1__index', {
-          duration: this.animSpeed,
-          x: 100,
-          opacity: 0
-        }, '-=0.5')
-        .from('.project-1__task', {
-          duration: this.animSpeed,
-          x: -100,
-          opacity: 0
-        }, '-=0.5')
-        .from('.project-1__name', {
-          duration: this.animSpeed,
-          x: -100,
-          opacity: 0
-        }, '-=0.5')
-        .from('.project-1__media', {
-          duration: this.animSpeed,
-          x: 100,
-          opacity: 0
-        }, '-=0.5')
-        .from('.project-1__description', {
-          duration: this.animSpeed,
-          x: 100,
-          opacity: 0
-        }, '-=0.5')
-        .from('.project-1__button', {
-          duration: this.animSpeed,
-          x: 100,
-          opacity: 0
-        }, '-=0.5')
-    }
+
+    const practiceAnim = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.practice',
+        start: 'top bottom',
+        markers: true,
+        autoRemoveChildren: true
+      }
+    })
+
+    practiceAnim.from('.practice', {
+      duration: this.animSpeed,
+      y: 100,
+      opacity: 0
+    })
+      .from('.practice__icon-set', {
+        duration: this.animSpeed,
+        y: 100,
+        opacity: 0
+      }, '-=0.4')
   },
   computed: {
     ...mapState({

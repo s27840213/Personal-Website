@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="artwork")
-    h1(class="artwork__heading") Artwork
+    h1(class="artwork__heading") Artwork(要重做QQ)
     div(class="creation")
       div(class="creation__demo")
         img(class="creation__img" :src="require('@/assets/artwork/creation/oblogo.png')")
@@ -38,7 +38,8 @@ export default {
       scrollTrigger: {
         trigger: '.artwork__heading',
         start: 'top bottom',
-        markers: true
+        markers: true,
+        autoRemoveChildren: true
       }
     }).from('.artwork__heading', {
       duration: this.animSpeed,
@@ -82,22 +83,23 @@ export default {
   },
   methods: {
     isoAnimation () {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.iso',
-          start: 'top bottom',
-          markers: true
-        }
+      const targets = document.querySelectorAll('.iso-building')
+      targets.forEach(target => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: target,
+            start: 'top bottom',
+            maker: true,
+            autoRemoveChildren: true
+          }
+        })
+          .from(target, {
+            duration: this.animSpeed * 2,
+            y: 100,
+            opacity: 0,
+            ease: 'power4.out'
+          }, '-=0.4')
       })
-        .from('.iso-building', {
-          duration: this.animSpeed * 2,
-          y: 100,
-          opacity: 0,
-          ease: 'power4.out',
-          stagger: 0.1,
-          onStart: () => { this.isAnimating = true }
-        }, '-=0.4')
-      return tl
     }
   }
 }

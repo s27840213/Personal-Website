@@ -10,7 +10,7 @@
     div(class="right")
       div(class="right__heading") About Me
       div(class="right__education") Graduated from NCKU #[br] with Bachelor’s Degree In CSIE
-      div(class="right__content") Passionate about coding with motion graphic design. Like to learning  new technologies to sharpen my programming skills. I’m currently work as an front-end developer and UI/UX designer in an indepentent game developemt studio -- CItyChaser, and now I’m serving the alternative millitary service at Tainan.
+      div(class="right__content") Kyronus is a simulation mobile game which connects  to the real world with Gamification. Kyronus allows players to collect and build those famous tourist attractions in Taiwan on their own planet! We hope Kyronus could enhance player’s understanding  of the local culture of Taiwan .
 </template>
 
 <script>
