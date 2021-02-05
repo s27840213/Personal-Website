@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="artwork")
-    h1(class="artwork__heading") Artwork
+    h1(class="artwork__heading") Artwork(要重做QQ)
     div(class="creation")
       div(class="creation__demo")
         img(class="creation__img" :src="require('@/assets/artwork/creation/oblogo.png')")
@@ -10,15 +10,11 @@
         img(class="creation__img" :src="require('@/assets/artwork/creation/poster.png')")
         img(class="creation__img" :src="require('@/assets/artwork/creation/annie.png')")
     h2(class="sub-heading") Isometric Building
-    div(class="iso-building")
-      div(class="button button__prev" @click="prev")
-      div(class="iso-building__img-section")
-        img(class="iso-building__img" :src="require(`@/assets/artwork/isometric/${buildingInfo[currIndex].img}`)")
-      div(class="iso-building__info-section")
-        div(class="iso-building__location") {{buildingInfo[currIndex].location}}
-        div(class="iso-building__name") {{buildingInfo[currIndex].name}}
-      div(class="button button__next" @click="next")
-    div(class="iso-building__dot" v-for="index in buildingInfo.length" :style="{'opacity': index-1 === currIndex ? 1: 0.4}" @click="jumpTo(index)")
+    div(class="iso")
+      div(class="iso-building" v-for="building in buildingInfo")
+        img(class="iso-building__img" :src="require(`@/assets/artwork/isometric/${building.img}`)")
+        div(class="iso-building__location") {{building.location}}
+        div(class="iso-building__name") {{building.name}}
 </template>
 
 <script>
@@ -42,7 +38,8 @@ export default {
       scrollTrigger: {
         trigger: '.artwork__heading',
         start: 'top bottom',
-        markers: true
+        markers: true,
+        autoRemoveChildren: true
       }
     }).from('.artwork__heading', {
       duration: this.animSpeed,
@@ -71,10 +68,12 @@ export default {
       scale: 1.05
     })
 
-    VanillaTilt.init(document.querySelectorAll('.iso-building__img-section'), {
+    VanillaTilt.init(document.querySelectorAll('.iso-building'), {
       max: 10,
       speed: 600,
-      scale: 1.05
+      scale: 1.05,
+      glare: 1,
+      'max-glare': 0.2
     })
   },
   computed: {
@@ -84,84 +83,23 @@ export default {
   },
   methods: {
     isoAnimation () {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.iso-building__img-section',
-          start: 'top bottom',
-          markers: true
-        }
+      const targets = document.querySelectorAll('.iso-building')
+      targets.forEach(target => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: target,
+            start: 'top bottom',
+            maker: true,
+            autoRemoveChildren: true
+          }
+        })
+          .from(target, {
+            duration: this.animSpeed * 2,
+            y: 100,
+            opacity: 0,
+            ease: 'power4.out'
+          }, '-=0.4')
       })
-        .from('.iso-building__img-section', {
-          duration: this.animSpeed,
-          scale: 0,
-          opacity: 0,
-          ease: 'power4.out',
-          onStart: () => { this.isAnimating = true }
-        })
-        .from('.iso-building__img', {
-          duration: this.animSpeed * 1.5,
-          scale: 0,
-          opacity: 0,
-          ease: 'power4.out'
-        }, '-=0.3')
-        .from('.iso-building__location', {
-          duration: this.animSpeed,
-          x: -200,
-          opacity: 0,
-          ease: 'power4.out'
-        }, '-=0.6')
-        .from('.iso-building__name', {
-          duration: this.animSpeed,
-          x: -200,
-          opacity: 0,
-          ease: 'power4.out',
-          onComplete: () => { this.isAnimating = false }
-        }, '-=0.3')
-      return tl
-    },
-    switchIso (direction) {
-      let delta = direction === 'next' ? 200 : -200
-      this.isoAnim
-        .from('.iso-building__img', {
-          duration: this.animSpeed * 1.5,
-          opacity: 0,
-          x: -delta,
-          ease: 'power4.out',
-          onStart: () => { this.isAnimating = true }
-        })
-        .from('.iso-building__location', {
-          duration: this.animSpeed * 0.7,
-          x: -200,
-          opacity: 0,
-          ease: 'power4.out'
-        }, '-=0.6')
-        .from('.iso-building__name', {
-          duration: this.animSpeed * 0.7,
-          x: -200,
-          opacity: 0,
-          ease: 'power4.out',
-          onComplete: () => { this.isAnimating = false }
-        }, '-=0.3')
-    },
-    next () {
-      if (!this.isAnimating) {
-        this.switchIso('next')
-        this.currIndex = (this.currIndex + 1) % (this.buildingInfo.length)
-      }
-    },
-    prev () {
-      if (!this.isAnimating) {
-        this.switchIso('prev')
-        this.currIndex - 1 < 0 ? this.currIndex = this.buildingInfo.length - 1 : this.currIndex -= 1
-      }
-    },
-    jumpTo (index) {
-      if (!this.isAnimating) {
-        if (index - 1 !== this.currIndex) {
-          index - 1 > this.currIndex ? this.switchIso('next') : this.switchIso('prev')
-          this.currIndex = index - 1
-        }
-      }
     }
   }
 }
@@ -218,84 +156,58 @@ export default {
       height: 5px;
     }
   }
-  .iso-building {
-    @include pdGeneralHr;
+  .iso {
     display: grid;
-    align-items: center;
-    position: relative;
-    grid-template-rows: 1fr;
-    grid-template-columns: auto auto 1fr auto;
-    &__img-section {
-      @include size(400px);
-      background-color: setColor(secondary);
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 40px;
+    column-gap: 40px;
+    @include pdGeneral;
+
+    &-building {
+      @include glass;
+      align-items: center;
       position: relative;
+      padding: 20px;
       transform-style: preserve-3d;
       transform: perspective(1000px);
-      &::after {
-        content: "";
-        @include size(100%);
-        top: 0px;
-        left: 0px;
-        position: absolute;
-        border: 2px solid setColor(secondary);
+      &:hover {
+        .iso-building__img {
+          transform: translateZ(20px) scale(1.1);
+        }
+      }
+      &__img {
+        width: 100%;
+        padding: 20px;
+        transform: translateZ(20px);
         box-sizing: border-box;
-        transform: scale(1.05);
+        object-fit: contain;
+        filter: drop-shadow(0px 10px 10px setColor(primary, 0.8));
+        transition: transform 0.4s;
       }
-    }
-    &__img {
-      width: 100%;
-      padding: 20px;
-      transform: translateZ(20px);
-      box-sizing: border-box;
-      object-fit: contain;
-      filter: drop-shadow(0px 15px 10px setColor(primary, 0.6));
-    }
-    &__info-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      transform: translate3d(-2rem, 0, 0);
-    }
 
-    &__location {
-      font-size: 2rem;
-    }
-    &__name {
-      font-size: 3rem;
-      font-weight: bold;
-      text-align: left;
-      position: relative;
-      line-height: 4rem;
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: -40px;
-        left: 0px;
-        transform: translate3d(-50%, 0, 0);
-        height: 10px;
-        width: 100px;
-        background-color: setColor(text-color);
+      &__location {
+        font-size: 0.8rem;
+        opacity: 0.8;
+        transform: translateZ(20px);
       }
-    }
-    &__dot {
-      @include size(10px);
-      border-radius: 50%;
-      background-color: white;
-      display: inline-block;
-      margin: 40px 5px;
-      transition: 0.5s;
-    }
-  }
-  .button {
-    background-color: white;
-    &__prev {
-      @include size(50px);
-      transform: translate3d(-60px, 0, 0);
-    }
-    &__next {
-      @include size(50px);
-      transform: translate3d(60px, 0, 0);
+      &__name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        position: relative;
+        transform: translateZ(20px);
+        margin-top: 10px;
+        &::after {
+          content: "";
+          position: absolute;
+          top: -5px;
+          left: 50%;
+          transform: translate3d(-50%, 0, 0);
+          height: 2px;
+          width: 60%;
+          background-color: setColor(text-color);
+        }
+      }
     }
   }
 }

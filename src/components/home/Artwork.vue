@@ -1,14 +1,8 @@
 <template lang="pug">
   div(class="artwork")
-    h1(class="artwork__heading") Artwork(要重做QQ)
+    h1(class="artwork__heading") Artwork
     div(class="creation")
-      div(class="creation__demo")
-        img(class="creation__img" :src="require('@/assets/artwork/creation/oblogo.png')")
-        img(class="creation__img" :src="require('@/assets/artwork/creation/soc.png')")
-        img(class="creation__img" :src="require('@/assets/artwork/creation/lebron.png')")
-        img(class="creation__img" :src="require('@/assets/artwork/creation/obposter.png')")
-        img(class="creation__img" :src="require('@/assets/artwork/creation/poster.png')")
-        img(class="creation__img" :src="require('@/assets/artwork/creation/annie.png')")
+      img(v-for="(creation,index) in creations" class="creation__img" :class="`creation__img-${index}`"  :src="require(`@/assets/artwork/creation/${creation}`)")
     h2(class="sub-heading") Isometric Building
     div(class="iso")
       div(class="iso-building" v-for="building in buildingInfo")
@@ -30,7 +24,8 @@ export default {
       animSpeed: 0.7,
       currIndex: 0,
       isoAnim: null,
-      isAnimating: false
+      isAnimating: false,
+      creations: ['obposter.png', 'lebron.png', 'annie.png', 'oblogo.png', 'poster.png', 'soc.png']
     }
   },
   mounted () {
@@ -49,24 +44,34 @@ export default {
       onStartParams: ['.artwork__heading']
     })
 
-    const demoAnim = gsap.to('.creation__demo', {
+    let creations = document.querySelectorAll('.creation__img')
+    const creationAnim = gsap.timeline({
       scrollTrigger: {
-        trigger: '.creation__demo',
-        start: 'bottom bottom',
-        end: 'bottom top',
-        scrub: 1
-      },
-      xPercent: -50
+        trigger: '.creation',
+        start: 'top bottom'
+      }
+    })
+    creations.forEach((creation, index) => {
+      let direction = index % 2 === 0 ? -1 : 1
+      gsap.to(creation, {
+        scrollTrigger: {
+          trigger: '.creation',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.2
+        },
+        y: 300 * direction
+      })
     })
     this.isoAnim = this.isoAnimation()
 
     // handle tilt animation
 
-    VanillaTilt.init(document.querySelectorAll('.creation__img'), {
-      max: 10,
-      speed: 600,
-      scale: 1.05
-    })
+    // VanillaTilt.init(document.querySelectorAll('.creation__img'), {
+    //   max: 5,
+    //   speed: 600,
+    //   scale: 1.02
+    // })
 
     VanillaTilt.init(document.querySelectorAll('.iso-building'), {
       max: 10,
@@ -115,27 +120,37 @@ export default {
     }
   }
   .creation {
-    background: setColor(brown);
-    height: 500px;
-    overflow: hidden;
-    > div:nth-child(1) {
-      height: 100%;
-      display: flex;
-      flex-wrap: nowrap;
-      padding: 50px 0px;
-      box-sizing: border-box;
-      animation: demo 15s linear infinite;
-    }
+    @include pdGeneralHr;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 30px;
+    align-items: center;
     &__img {
-      height: 100%;
-      object-fit: contain;
       border-radius: 10px;
       margin: 0px 20px;
-      box-shadow: -5px -5px 10px setColor(black, 0.3),
-        5px 5px 10px setColor(black, 0.7);
+      box-shadow: 8px 8px 5px setColor(black, 0.9);
       transition: 0.5s ease-out;
-      &:hover {
-        transform: translateY(-15px);
+      margin: 50px 0px;
+      width: 100%;
+      &-0 {
+        align-self: flex-end;
+      }
+      // &-1 {
+      //   width: 45%;
+      // }
+      // &-2 {
+      //   width: 45%;
+      // }
+      // &-3 {
+      //   width: 50%;
+      // }
+      // &-4 {
+      //   width: 40%;
+      // }
+      &-5 {
+        align-self: flex-start;
       }
     }
   }

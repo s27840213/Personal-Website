@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="root-contact")
-    h1(class="heading") Contack
+    h1(class="heading") Contact
     div(class="contact")
       div(class="contact__approach")
         div

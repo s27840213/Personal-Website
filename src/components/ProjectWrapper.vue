@@ -2,7 +2,7 @@
   div(class="project-wrapper")
     div(class="tilt-targetProject project-wrapper__img" :style="{'background-image': `url(${mapProjectImg()})`}")
       div(class="project-wrapper__index") 0{{index+1}}
-    div
+    div(class="project-wrapper__info")
       div(class="project-wrapper__task") {{projectInfo.task}}
       div(class="project-wrapper__name") {{projectInfo.name}}
       div(v-if="projectInfo.media !== null" class="project-wrapper__media")
@@ -46,7 +46,7 @@ export default {
       })
         .from(targetProject.querySelector('.project-wrapper__img'), {
           duration: this.animSpeed,
-          x: 100,
+          x: -100,
           opacity: 0,
           onComplete: () => {
             VanillaTilt.init(targetProject.querySelector('.project-wrapper__img'), {
@@ -64,27 +64,27 @@ export default {
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__task'), {
           duration: this.animSpeed,
-          x: -100,
+          x: 100,
           opacity: 0
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__name'), {
           duration: this.animSpeed,
-          x: -100,
+          x: 100,
           opacity: 0
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__media'), {
           duration: this.animSpeed,
-          x: 100,
+          x: -100,
           opacity: 0
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__description'), {
           duration: this.animSpeed,
-          x: 100,
+          x: -100,
           opacity: 0
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__button'), {
           duration: this.animSpeed,
-          x: 100,
+          x: -100,
           opacity: 0
         }, '-=0.5')
     }
