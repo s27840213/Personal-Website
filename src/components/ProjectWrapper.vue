@@ -60,22 +60,26 @@ export default {
         .from(targetProject.querySelector('.project-wrapper__index'), {
           duration: this.animSpeed,
           x: 100,
-          opacity: 0
+          opacity: 0,
+          clearProps: 'all'
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__task'), {
           duration: this.animSpeed,
           x: 100,
-          opacity: 0
+          opacity: 0,
+          clearProps: 'all'
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__name'), {
           duration: this.animSpeed,
           x: 100,
-          opacity: 0
+          opacity: 0,
+          clearProps: 'all'
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__media'), {
           duration: this.animSpeed,
           x: -100,
-          opacity: 0
+          opacity: 0,
+          clearProps: 'all'
         }, '-=0.5')
         .from(targetProject.querySelector('.project-wrapper__description'), {
           duration: this.animSpeed,
@@ -104,91 +108,169 @@ export default {
   text-align: left;
   line-height: 200%;
 }
-
-.project-wrapper {
-  @include pdGeneral;
-  display: grid;
-  align-items: center;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1.3fr 1fr;
-  column-gap: 30px;
-  text-align: left;
-  background-color: setColor(secondary, 0.4);
-  &__img {
-    @include size(100%, 0);
-    padding-top: 62%;
-    position: relative;
-    // background-image: linear-gradient(
-    //     to left,
-    //     setColor(primary, 0.3) 0%,
-    //     transparent 50%
-    //   ),
-    //   url("~@/assets/img/telecan.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-  &__task {
-    font-size: 2rem;
-    font-weight: bold;
-    transform: translate3d(-25%, 0, 0);
-    @include textShadow;
-  }
-  &__media {
-    display: inline-flex;
-    > a {
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-    }
-    img {
-      @include size(30px);
-      transition: transform 0.3s;
-      padding: 10px 10px;
+@include pcStyle {
+  .project-wrapper {
+    @include pdGeneral;
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1.3fr 1fr;
+    column-gap: 30px;
+    text-align: left;
+    background-color: setColor(secondary, 0.4);
+    &__img {
+      @include size(100%, 0);
+      padding-top: 62%;
+      position: relative;
+      background-color: setColor(primary);
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
       &:hover {
         transform: scale(1.1);
       }
     }
-  }
-  &__name {
-    font-size: 4rem;
-    font-weight: bold;
-    transform: translate3d(-25%, 0, 0);
-    @include textShadow;
-  }
-  &__description {
-    @include description;
-  }
-  &__index {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-size: 96px;
-    font-weight: bold;
-    transform: translate3d(-50%, 50%, 0px);
-    @include textShadow;
-  }
-  &__button {
-    display: inline-block;
-    font-size: 2rem;
-    font-weight: bold;
-    position: relative;
-    cursor: pointer;
-    > span::after {
-      content: "";
-      position: absolute;
-      background-color: setColor(text-color);
-      @include size(50%, 2px);
-      bottom: 0px;
-      left: 0px;
-      transition: 0.5s;
+    &__task {
+      font-size: 2rem;
+      font-weight: bold;
+      transform: translate3d(-25%, 0, 0);
+      @include textShadow;
     }
-    &:hover {
+    &__media {
+      display: inline-flex;
+      > a {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+      }
+      img {
+        @include size(30px);
+        transition: transform 0.3s;
+        padding: 10px 10px;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+    &__name {
+      font-size: 4rem;
+      font-weight: bold;
+      transform: translate3d(-25%, 0, 0);
+      @include textShadow;
+    }
+    &__description {
+      @include description;
+    }
+    &__index {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 96px;
+      font-weight: bold;
+      transform: translate3d(-50%, 50%, 0px);
+      @include textShadow;
+    }
+    &__button {
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: bold;
+      position: relative;
+      cursor: pointer;
       > span::after {
-        width: 100%;
+        content: "";
+        position: absolute;
+        background-color: setColor(text-color);
+        @include size(50%, 2px);
+        bottom: 0px;
+        left: 0px;
+        transition: 0.5s;
+      }
+      &:hover {
+        > span::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@include mobileStyle {
+  .project-wrapper {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+    column-gap: 30px;
+    padding: 30px;
+    background-color: setColor(secondary, 0.4);
+    &__img {
+      @include size(100%, 0);
+      padding-top: 62%;
+      position: relative;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-bottom: 40px;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    &__task {
+      font-size: 2rem;
+      font-weight: bold;
+      @include textShadow;
+    }
+    &__media {
+      display: inline-flex;
+      > a {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+      }
+      img {
+        @include size(30px);
+        transition: transform 0.3s;
+        padding: 10px 10px;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+    &__name {
+      font-size: 4rem;
+      font-weight: bold;
+      @include textShadow;
+    }
+    &__description {
+      @include description;
+    }
+    &__index {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 4rem;
+      font-weight: bold;
+      transform: translate3d(-50%, 50%, 0px);
+      @include textShadow;
+    }
+    &__button {
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: bold;
+      position: relative;
+      cursor: pointer;
+      > span::after {
+        content: "";
+        position: absolute;
+        background-color: setColor(text-color);
+        @include size(50%, 2px);
+        bottom: 0px;
+        left: 0px;
+        transition: 0.5s;
+      }
+      &:hover {
+        > span::after {
+          width: 100%;
+        }
       }
     }
   }

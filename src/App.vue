@@ -1,13 +1,16 @@
 <template lang="pug">
   div(id="app")
-    navbar(:navList="['Home','About','Skills','Portofolio','Contact']" @switchMenu="switchMenus")
+    loading
+    navbar(:navList="['Home','About','Skill','Project','Artwork','Contact']")
     router-view
 </template>
 <script>
 import Navbar from '@/components/Navbar.vue'
+import Loading from '@/components/Loading.vue'
 export default {
   components: {
-    Navbar
+    Navbar,
+    Loading
   },
   methods: {
     switchMenus (item) {

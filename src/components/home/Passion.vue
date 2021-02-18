@@ -25,7 +25,6 @@ export default {
       scrollTrigger: {
         trigger: '.passion__heading',
         start: 'top bottom',
-        markers: true,
         autoRemoveChildren: true
       }
     })

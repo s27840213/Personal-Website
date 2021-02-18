@@ -61,11 +61,6 @@ export default new Vuex.Store({
         location: 'Penghu, Taiwan',
         img: 'twinStonesHeart.png'
       },
-      // {
-      //   name: 'Longshan Temple',
-      //   location: 'Taipei, Taiwan',
-      //   img: 'longshanTemple.png'
-      // },
       {
         name: 'Xiaojiang Pavilion',
         location: 'Hsinchu, Taiwan',
@@ -84,16 +79,32 @@ export default new Vuex.Store({
       },
       {
         name: 'Telecan',
-        task: 'UI, Front-end',
+        task: 'Front-end, Visualization',
         media: null,
         description: 'Telecan is a project which was nominated in the 2020 Ustart. It use image recognition technology to record the data of trash in certain place. My friend and I just do the freelance work for them to create the website. My friend was responsible for the back-end, and I was responsible for the front-end',
         button: 'visit site',
         buttonCallback: null,
         cover: 'telecan.png'
       }
-    ]
+    ],
+    isLoading: true,
+    scrollTarget: null
+  },
+  getters: {
+    getIsLoading (state) {
+      return state.isLoading
+    },
+    getScrollTarget (state) {
+      return state.scrollTarget
+    }
   },
   mutations: {
+    SET_isLoading (state, boolean) {
+      state.isLoading = boolean
+    },
+    SET_scrollTarget (state, target) {
+      state.scrollTarget = target
+    }
   },
   actions: {
   },

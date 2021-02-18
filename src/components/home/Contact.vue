@@ -1,24 +1,58 @@
 <template lang="pug">
-  div(class="root-contact")
-    h1(class="heading") Contact
-    div(class="contact")
-      div(class="contact__approach")
-        div
+  div(class="contact")
+    h1(class="contact__heading") Contact
+    div(class="contact-info")
+      div(class="contact-info__approach")
+        img(:src="require('@/assets/icon/email.svg')")
         span s27840213@gmail.com
-      div(class="contact__approach")
-        div
-        span Facebook
-      div(class="contact__approach")
-        div
-        span Instagram
+      div(class="contact-info__approach")
+        img(:src="require('@/assets/icon/fb.svg')")
+        a(href="")
+          span Facebook
+      div(class="contact-info__approach")
+        img(:src="require('@/assets/icon/ig.svg')")
+        a(href="")
+          span Instagram
 </template>
 
 <script>
 import VanillaTilt from 'vanilla-tilt'
-
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { animatePseudo } from '@/utils/utility.js'
 export default {
+  data () {
+    return {
+      animSpeed: 0.7
+    }
+  },
   mounted () {
-    VanillaTilt.init(document.querySelectorAll('.root-contact'), {
+    const contactAnim = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.contact',
+        start: 'top bottom',
+        autoRemoveChildren: true
+      }
+    })
+      .from('.contact', {
+        duration: this.animSpeed,
+        y: 100,
+        opacity: 0
+      })
+      .from('.contact__heading', {
+        duration: this.animSpeed,
+        y: 100,
+        opacity: 0,
+        onStart: animatePseudo,
+        onStartParams: ['.contact__heading']
+      }, '-=0.3')
+      .from('.contact-info__approach', {
+        duration: this.animSpeed * 0.7,
+        y: 100,
+        opacity: 0,
+        stagger: 0.3
+      }, '-=0.3')
+    VanillaTilt.init(document.querySelectorAll('.contact'), {
       max: 2,
       speed: 200
     })
@@ -27,32 +61,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.root-contact {
-  background-color: setColor(brown);
-  padding-bottom: 100px;
+.contact {
+  @include glass;
   position: relative;
   box-sizing: border-box;
-  margin: 100px;
-  border-radius: 15px;
-  background-color: rgba(white, 0.1);
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-left: 1px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(5px);
-  overflow: hidden;
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 10px;
-  //   bottom: 0;
-  //   left: 0;
-  //   background-color: setColor(text-color);
-  // }
-  .heading {
-    margin-bottom: 50px;
+  @include pcStyle {
+    margin: 100px;
+    padding-bottom: 100px;
   }
-  .contact {
+  @include mobileStyle {
+    margin: 30px;
+    padding-bottom: 30px;
+  }
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    bottom: 0;
+    left: 0;
+    background-color: setColor(text-color, 0.6);
+  }
+  &__heading {
+    @include heading;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    &.animatePseudo::after {
+      transition-delay: 0.25s;
+      width: 25%;
+    }
+  }
+  &-info {
     display: grid;
     justify-content: center;
     grid-template-columns: auto;
@@ -60,16 +100,40 @@ export default {
     &__approach {
       display: flex;
       align-items: center;
-      margin: 5px;
-      > div {
-        @include size(50px);
-        background-color: gray;
+      margin: 10px;
+      > img {
+        @include size(30px);
         margin-right: 20px;
+        transition: 0.6s;
       }
-      > span {
-        color: setColor(text-color);
-        font-size: 24px;
+      > a {
+        text-decoration: none;
+      }
+      span {
+        color: setColor(white);
+        font-size: 1.5rem;
         font-weight: bold;
+        transition: 0.6s;
+        position: relative;
+        cursor: pointer;
+        &:hover {
+          &::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          @include size(100%, 3px);
+          transform: scaleX(0);
+          transform-origin: left;
+          left: 0;
+          bottom: 0;
+          transition: transform 0.6s;
+          background-color: setColor(text-color);
+          transform-origin: right;
+        }
       }
     }
   }

@@ -1,63 +1,77 @@
 <template lang="pug">
   div(class="landing-page")
-    img(class="layer layer1" data-speed= "0" :src="require('@/assets/img/landingPage/layer1.png')")
-    img(class="layer layer2" data-speed= "2" :src="require('@/assets/img/landingPage/layer2.png')")
-    img(class="layer layer2__house" data-speed= "2" :src="require('@/assets/img/landingPage/layer2_house.svg')")
-    img(class="layer layer3" data-speed= "4" :src="require('@/assets/img/landingPage/layer3.png')")
-    img(class="layer layer4__left" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_left.svg')")
-    img(class="layer layer4__right" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_right.svg')")
-    img(class="layer layer5" data-speed= "6" :src="require('@/assets/img/landingPage/layer5.svg')")
-    img(class="layer layer6" data-speed= "7" :src="require('@/assets/img/landingPage/layer6.svg')")
-    img(class="layer layer7" data-speed= "8" :src="require('@/assets/img/landingPage/layer7.svg')")
-    img(class="layer layer8" data-speed= "10" :src="require('@/assets/img/landingPage/moon.svg')")
-    div(class="msg-block")
-      div
-        div(class="msg-block__msg") Welcome Here
-      div
-        div(class="msg-block__msg") I'm Alan Chang
-      div
-        div(class="msg-block__msg") Front-end Engineer | Web Designer
+    div(class="landing-page__container")
+      img(class="layer layer1" data-speed= "0" :src="require('@/assets/img/landingPage/layer1.png')")
+      img(class="layer layer2" data-speed= "2" :src="require('@/assets/img/landingPage/layer2.png')")
+      img(class="layer layer2__house" data-speed= "2" :src="require('@/assets/img/landingPage/layer2_house.svg')")
+      img(class="layer layer3" data-speed= "4" :src="require('@/assets/img/landingPage/layer3.png')")
+      img(class="layer layer4__left" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_left.svg')")
+      img(class="layer layer4__right" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_right.svg')")
+      img(class="layer layer5" data-speed= "6" :src="require('@/assets/img/landingPage/layer5.svg')")
+      img(class="layer layer6" data-speed= "7" :src="require('@/assets/img/landingPage/layer6.svg')")
+      img(class="layer layer7" data-speed= "8" :src="require('@/assets/img/landingPage/layer7.svg')")
+      img(class="layer layer8" data-speed= "10" :src="require('@/assets/img/landingPage/moon.svg')")
+      div(class="msg-block")
+        div
+          div(class="msg-block__msg") Welcome Here
+        div
+          div(class="msg-block__msg") I'm Alan Chang
+        div
+          div(class="msg-block__msg") Front-end Engineer | Web Designer
 </template>
 
 <script>
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  data () {
+    return {
+      hasPlayed: false,
+      landingPageAnim: null,
+      screenHeight: null
+    }
+  },
   mounted () {
+    this.screenHeight = document.querySelector('.landing-page').offsetHeight
     document.addEventListener('scroll', this.parallax)
-    const landingPageAnim = gsap.timeline({
-      paused: true,
-      autoRemoveChildren: true
+    this.landingPageAnim = gsap.timeline({
+      paused: true
     })
     let msg = document.querySelectorAll('.msg-block__msg')
     document.querySelectorAll('.layer').forEach((layer, index) => {
       if (index === 0) {
-        landingPageAnim.from(layer, {
+        this.landingPageAnim.from(layer, {
           duration: 1,
           yPercent: 100,
           ease: 'power4.out'
-        })
+        }, 's')
       } else if (index === 9) {
         /**
          * For moon animation
          */
-        landingPageAnim.from(layer, {
+        this.landingPageAnim.from(layer, {
           duration: 1,
           opacity: 0,
           y: 200,
           ease: 'power4.out'
         }, '-=0.5')
       } else {
-        landingPageAnim.from(layer, {
+        this.landingPageAnim.from(layer, {
           duration: 1,
           yPercent: 100,
           ease: 'power4.out'
         }, '-=0.85')
       }
     })
-    landingPageAnim.from(msg[0], {
+    this.landingPageAnim.from('.landing-page__container', {
+      duration: 2,
+      scale: 2,
+      ease: 'power4.out'
+    }, 's')
+    this.landingPageAnim.from(msg[0], {
       duration: 0.7,
       opacity: 0,
       ease: 'power4.out',
@@ -73,46 +87,57 @@ export default {
         ease: 'power4.out',
         xPercent: -100
       }, '-=0.6')
-    landingPageAnim.play()
+  },
+  computed: {
+    ...mapGetters({
+      getIsLoading: 'getIsLoading'
+    })
+  },
+  watch: {
+    getIsLoading () {
+      if (this.getIsLoading) {
+        this.landingPageAnim.paused()
+      } else {
+        if (this.hasPlayed) {
+          // this.landingPageAnim.restart()
+        } else {
+          this.landingPageAnim.play()
+          this.hasPlayed = true
+        }
+      }
+    }
   },
   methods: {
-    // parallax (e) {
-    //   document.querySelectorAll('.layer').forEach(layer => {
-    //     const speed = layer.getAttribute('data-speed')
-    //     const x = (window.innerWidth - e.pageX * speed) / 200
-    //     const y = (window.innerHeight - e.pageY * speed) / 200
-    //     layer.style.transform = `translateX(${x}px) translateY(${y}px)`
-    //   })
-    // }
     parallax (e) {
-      document.querySelectorAll('.layer').forEach(layer => {
-        let scroll = window.pageYOffset
-        const speed = layer.getAttribute('data-speed')
-        const height = document.querySelector('.landing-page').offsetHeight
-        // const x = (window.innerWidth - e.pageX * speed) / 200
-        gsap.to(layer, {
-          y: scroll * speed / 15
-          // opacity: 1 - (scroll / height) * (speed / 7) * (7 / 10)
+      let scroll = window.pageYOffset
+      if (scroll < this.screenHeight) {
+        document.querySelectorAll('.layer').forEach(layer => {
+          const speed = layer.getAttribute('data-speed')
+          gsap.to(layer, {
+            y: scroll * speed / 15
+          })
         })
-        // layer.style.transform = `translateY(${scroll * speed / 15}px)`
-        // layer.style.opacity = 1 - (scroll / height) * (speed / 7) * (7 / 10)
-        // layer.style.transform = `translateX(${x}px) translateY(${y}px)`
-      })
+      }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 .landing-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   box-sizing: border-box;
-  background-color: #fedcc8;
   @include size(100vw, 100vh);
   max-width: 100%;
   position: relative;
   overflow: hidden;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include size(100vw, 100vh);
+    position: relative;
+    overflow: hidden;
+    background-color: #fedcc8;
+  }
   .layer {
     position: absolute;
     &1 {
@@ -173,33 +198,6 @@ export default {
       width: clamp(100px, 10vw, 100px);
     }
   }
-  // &::after {
-  //   content: "1234";
-  //   position: absolute;
-  //   width: 100vw;
-  //   height: 100vh;
-  //   // transform: translate3d(0, -35%, 0);
-  //   background-image: radial-gradient(
-  //     circle at 50% -10%,
-  //     #1e3740 20%,
-  //     #1d353f 20%,
-  //     #1d353f 30%,
-  //     #1b333d 30%,
-  //     #1b333d 40%,
-  //     #19313b 40%,
-  //     #19313b 50%,
-  //     #172e38 50%,
-  //     #172e38 60%,
-  //     #142b35 60%,
-  //     #142b35 70%,
-  //     #122832 70%,
-  //     #122832 80%,
-  //     #0f252f 80%,
-  //     #0f252f 90%,
-  //     #0d222c 90%,
-  //     #0a1f29 100%
-  //   );
-  // }
 }
 .msg-block {
   color: setColor(primary);
@@ -212,13 +210,13 @@ export default {
       transform: translate3d(0, 10px, 0);
     }
     &:nth-child(2) {
-      font-size: 48px;
+      font-size: 3rem;
       font-weight: 800;
       opacity: 0.8;
       overflow: hidden;
     }
     &:nth-child(3) {
-      font-size: 24px;
+      font-size: 1.5rem;
       color: setColor(red);
       opacity: 0.7;
       overflow: hidden;

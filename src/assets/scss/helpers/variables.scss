@@ -50,5 +50,11 @@ $zindex: (
   "layer1",
   "avatar",
   "paragraph",
-  "navbar"
+  "navbar",
+  "loading"
+);
+
+$breakpoints: (
+  pc: 768px,
+  mobile: 767px,
 );

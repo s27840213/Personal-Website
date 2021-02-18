@@ -33,9 +33,9 @@ export default {
       scrollTrigger: {
         trigger: '.project__heading',
         start: 'top bottom',
-        markers: true,
         autoRemoveChildren: true
-      }
+      },
+      clearProps: 'all'
     }).from('.project__heading', {
       duration: this.animSpeed,
       y: 100,
@@ -48,7 +48,6 @@ export default {
       scrollTrigger: {
         trigger: '.practice',
         start: 'top bottom',
-        markers: true,
         autoRemoveChildren: true
       }
     })
@@ -103,17 +102,34 @@ export default {
     }
   }
   .practice {
-    margin-top: 100px;
-    font-size: 1.5rem;
-    font-weight: 700;
-    &__icon {
-      width: 40px;
-      height: 40px;
-      margin: 20px 20px;
-      transition: 0.3s ease-out;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.2);
+    @include pcStyle() {
+      margin-top: 100px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      &__icon {
+        width: 40px;
+        height: 40px;
+        margin: 20px 20px;
+        transition: 0.3s ease-out;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+    @include mobileStyle() {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      &__icon {
+        width: 40px;
+        height: 40px;
+        margin: 10px 10px;
+        transition: 0.3s ease-out;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.2);
+        }
       }
     }
   }

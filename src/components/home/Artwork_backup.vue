@@ -38,7 +38,6 @@ export default {
       scrollTrigger: {
         trigger: '.artwork__heading',
         start: 'top bottom',
-        markers: true,
         autoRemoveChildren: true
       }
     }).from('.artwork__heading', {

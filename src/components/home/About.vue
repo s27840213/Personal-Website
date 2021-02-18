@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="root-about")
+  div(class="about")
     div(class="left")
       div(class="left__avatar")
       div(class="left__info")
@@ -9,7 +9,7 @@
         //- img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
     div(class="right")
       div(class="right__heading") About Me
-      div(class="right__education") Graduated from NCKU #[br] with Bachelor’s Degree In CSIE
+      div(class="right__education") Graduated from National Cheng Kung University #[br] B.S in Computer Science and Infomation Engineering
       div(class="right__content") Kyronus is a simulation mobile game which connects  to the real world with Gamification. Kyronus allows players to collect and build those famous tourist attractions in Taiwan on their own planet! We hope Kyronus could enhance player’s understanding  of the local culture of Taiwan .
 </template>
 
@@ -80,103 +80,186 @@ export default {
 </script>
 
 <style lang="scss">
-.root-about {
+.about {
   @include pdGeneralHr;
   width: 100%;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-gap: 80px;
-  .left {
-    position: relative;
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
-    &__avatar {
-      width: clamp(300px, 100%, 100%);
-      height: 60vh;
-      box-sizing: border-box;
-      clip-path: polygon(
-        100% 0%,
-        90% 50%,
-        100% 100%,
-        25% 100%,
-        15% 50%,
-        25% 0%
-      );
-      background-image: linear-gradient(
-          to top,
-          setColor(primary) 0%,
-          rgba(255, 255, 255, 0) 50%
-        ),
-        url("~@/assets/img/me.jpg");
-      background-position: center;
-      background-size: cover;
-    }
-    &__info {
-      position: absolute;
-      bottom: 50px;
-      right: -32px;
-      text-align: right;
-      font-weight: bold;
-      transform: translate3d(0, 0, 20px);
+  @include pcStyle {
+    padding-top: 100px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 80px;
+    .left {
+      position: relative;
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
+      &__avatar {
+        width: clamp(300px, 100%, 100%);
+        height: 60vh;
+        box-sizing: border-box;
+        clip-path: polygon(
+          100% 0%,
+          90% 50%,
+          100% 100%,
+          25% 100%,
+          15% 50%,
+          25% 0%
+        );
+        background-image: linear-gradient(
+            to top,
+            setColor(primary) 0%,
+            rgba(255, 255, 255, 0) 50%
+          ),
+          url("~@/assets/img/me.jpg");
+        background-position: center;
+        background-size: cover;
+      }
+      &__info {
+        position: absolute;
+        bottom: 50px;
+        right: -32px;
+        text-align: right;
+        font-weight: bold;
+        transform: translate3d(0, 0, 20px);
 
-      > div {
-        &:nth-child(1) {
-          font-size: 24px;
-          text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
+        > div {
+          &:nth-child(1) {
+            font-size: 24px;
+            text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
+          }
+          &:nth-child(2) {
+            font-size: 40px;
+            text-shadow: 4px 4px 0px rgba(setColor(secondary), 0.8);
+          }
+          &:nth-child(3) {
+            font-size: 16px;
+            text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
+          }
         }
-        &:nth-child(2) {
-          font-size: 40px;
-          text-shadow: 4px 4px 0px rgba(setColor(secondary), 0.8);
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 30px;
+      text-align: left;
+      &__heading {
+        width: 100%;
+        font-size: 6rem;
+        font-weight: 800;
+        transform: translateX(-30%);
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 0px;
+          height: 5px;
+          bottom: 0px;
+          left: 0px;
+          background-color: setColor(text-color);
+          transform-origin: left;
+          transition: 1s;
         }
-        &:nth-child(3) {
-          font-size: 16px;
-          text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
+        &.animatePseudo::after {
+          transition-delay: 0.5s;
+          width: 80%;
         }
+      }
+      &__education {
+        font-size: 1.2rem;
+        margin: 10px 0px;
+        color: setColor(text-color);
+        font-weight: 600;
+      }
+      &__content {
+        font-size: 1rem;
+        color: setColor(text-color);
+        transform: translate3d(10px, 0, 0);
+        line-height: 200%;
       }
     }
   }
-
-  .right {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 30px;
-    text-align: left;
-    &__heading {
-      width: 100%;
-      font-size: 96px;
-      font-weight: 800;
-      transform: translateX(-30%);
+  @include mobileStyle {
+    padding-top: 20px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    .left {
       position: relative;
-      &::after {
-        content: "";
+      padding: 0 10%;
+      &__avatar {
+        width: clamp(300px, 100%, 100%);
+        height: 40vh;
+        box-sizing: border-box;
+        background-image: linear-gradient(
+            to top,
+            setColor(primary) 0%,
+            rgba(255, 255, 255, 0) 50%
+          ),
+          url("~@/assets/img/me.jpg");
+        background-position: center;
+        background-size: cover;
+      }
+      &__info {
         position: absolute;
-        width: 0px;
-        height: 5px;
-        bottom: 0px;
-        left: 0px;
-        background-color: setColor(text-color);
-        transform-origin: left;
-        transition: 1s;
-      }
-      &.animatePseudo::after {
-        transition-delay: 0.5s;
-        width: 80%;
+        bottom: 50px;
+        right: 30px;
+        text-align: right;
+        font-weight: bold;
+        > div {
+          &:nth-child(1) {
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
+          }
+          &:nth-child(2) {
+            font-size: 2.5rem;
+            text-shadow: 4px 4px 0px rgba(setColor(secondary), 0.8);
+          }
+          &:nth-child(3) {
+            font-size: 1rem;
+            text-shadow: 2px 2px 0px rgba(setColor(secondary), 0.8);
+          }
+        }
       }
     }
-    &__education {
-      font-size: 24px;
-      margin: 10px 0px;
-      color: setColor(text-color);
-      font-weight: 600;
-    }
-    &__content {
-      font-size: 16px;
-      color: setColor(text-color);
-      transform: translate3d(10px, 0, 0);
-      line-height: 200%;
+    .right {
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      &__heading {
+        width: 100%;
+        font-size: 6rem;
+        font-weight: 800;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 0px;
+          height: 2px;
+          bottom: 0px;
+          left: 0px;
+          background-color: setColor(text-color);
+          transform-origin: left;
+          transition: 1s;
+        }
+        &.animatePseudo::after {
+          transition-delay: 0.5s;
+          width: 100%;
+        }
+      }
+      &__education {
+        font-size: 1.2rem;
+        margin: 10px 0px;
+        color: setColor(text-color);
+        font-weight: 600;
+      }
+      &__content {
+        font-size: 1rem;
+        color: setColor(text-color);
+        transform: translate3d(10px, 0, 0);
+        line-height: 200%;
+      }
     }
   }
 }
