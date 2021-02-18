@@ -8,7 +8,7 @@ div(class="home")
   contact
   div(class="bottom")
     div(class="bottom__icon-set")
-      a(v-for="icon in icons" href="#")
+      a(v-for="icon in icons" :href="`${mappingUrl(icon)}`" target="blank")
         div(class="bottom__icon" :style="{'mask-image': `url(${mappingIcon(icon)})`}")
     div(class="bottom__copyright") Copyright © 2021 - Alan Chang
 </template>
@@ -22,6 +22,7 @@ import Contact from '@/components/home/Contact.vue'
 import Project from '@/components/home/Project.vue'
 import Practice from '@/components/home/Practice.vue'
 import Artwork from '@/components/home/Artwork.vue'
+import { mappingUrl } from '@/utils/utility.js'
 
 export default {
   name: 'Home',
@@ -44,7 +45,8 @@ export default {
     mappingIcon (icon) {
       console.log(require(`@/assets/icon/${icon}.svg`))
       return require(`@/assets/icon/${icon}.svg`)
-    }
+    },
+    mappingUrl
   }
 }
 </script>

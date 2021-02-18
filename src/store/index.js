@@ -71,7 +71,14 @@ export default new Vuex.Store({
       {
         name: 'Kyronus',
         task: 'UI, Illustration, Front-end',
-        media: ['fb', 'ig'],
+        media: [{
+          name: 'fb',
+          url: 'https://www.facebook.com/kyronus.tw/'
+        },
+        {
+          name: 'ig',
+          url: 'https://www.instagram.com/kyronus.tw/'
+        }],
         description: 'Kyronus is a simulation mobile game which connects  to the real world with Gamification. Kyronus allows players to collect and build those famous tourist attractions in Taiwan on their own planet! We hope Kyronus could enhance player’s understanding  of the local culture of Taiwan .',
         button: 'more info',
         buttonCallback: null,

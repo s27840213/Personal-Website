@@ -6,8 +6,9 @@
     div(class="practice")
       span(class="practice__text") Watch Some Practices on my
       div(class="practice__icon-set")
-        img(class="practice__icon" :src="require('@/assets/icon/github.svg')")
-        a(href="https://codepen.io/collection/AMdQPg?sort_by=id&cursor=ZD0wJm89MCZwPTEmdj03MDQ4Nzcx" target="blank")
+        a(:href="`${mappingUrl('github')}`" target="blank")
+          img(class="practice__icon" :src="require('@/assets/icon/github.svg')")
+        a(:href="`${mappingUrl('codepen')}`" target="blank")
           img(class="practice__icon" :src="require('@/assets/icon/codepen.svg')")
 </template>
 
@@ -16,7 +17,7 @@ import ProjectWrapper from '@/components/ProjectWrapper.vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import VanillaTilt from 'vanilla-tilt'
-import { animatePseudo } from '@/utils/utility.js'
+import { animatePseudo, mappingUrl } from '@/utils/utility.js'
 import { mapState } from 'vuex'
 
 export default {
@@ -34,8 +35,7 @@ export default {
         trigger: '.project__heading',
         start: 'top bottom',
         autoRemoveChildren: true
-      },
-      clearProps: 'all'
+      }
     }).from('.project__heading', {
       duration: this.animSpeed,
       y: 100,
@@ -62,6 +62,9 @@ export default {
         y: 100,
         opacity: 0
       }, '-=0.4')
+  },
+  methods: {
+    mappingUrl
   },
   computed: {
     ...mapState({
@@ -91,7 +94,7 @@ export default {
     @include heading;
     &.animatePseudo::after {
       transition-delay: 0.25s;
-      transform: translate3d(-50%, 0, 0) scale(1);
+      width: 25%;
     }
   }
   .project__container {

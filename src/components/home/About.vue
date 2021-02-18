@@ -9,7 +9,9 @@
         //- img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
     div(class="right")
       div(class="right__heading") About Me
-      div(class="right__education") Graduated from National Cheng Kung University #[br] B.S in Computer Science and Infomation Engineering
+      div(class="right__education")
+        img(:src="require('@/assets/icon/education.svg')")
+        span National Cheng Kung University (Sep. 2016 – Jun. 2020) #[br] B.S in Computer Science and Infomation Engineering
       div(class="right__content") Kyronus is a simulation mobile game which connects  to the real world with Gamification. Kyronus allows players to collect and build those famous tourist attractions in Taiwan on their own planet! We hope Kyronus could enhance player’s understanding  of the local culture of Taiwan .
 </template>
 
@@ -148,7 +150,7 @@ export default {
       text-align: left;
       &__heading {
         width: 100%;
-        font-size: 6rem;
+        font-size: 5rem;
         font-weight: 800;
         transform: translateX(-30%);
         position: relative;
@@ -169,10 +171,19 @@ export default {
         }
       }
       &__education {
-        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
         margin: 10px 0px;
         color: setColor(text-color);
         font-weight: 600;
+        > img {
+          @include size(30px);
+          margin-right: 10px;
+        }
+        > span {
+          font-size: 0.8rem;
+          font-weight: 800;
+        }
       }
       &__content {
         font-size: 1rem;
@@ -230,7 +241,7 @@ export default {
       padding: 15px;
       &__heading {
         width: 100%;
-        font-size: 6rem;
+        font-size: 5rem;
         font-weight: 800;
         position: relative;
         &::after {
@@ -250,10 +261,20 @@ export default {
         }
       }
       &__education {
-        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin: 10px 0px;
         color: setColor(text-color);
         font-weight: 600;
+        > img {
+          @include size(30px);
+          margin-right: 10px;
+        }
+        > span {
+          font-size: 0.6rem;
+          font-weight: 800;
+        }
       }
       &__content {
         font-size: 1rem;

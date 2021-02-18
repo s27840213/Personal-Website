@@ -6,8 +6,8 @@
       div(class="project-wrapper__task") {{projectInfo.task}}
       div(class="project-wrapper__name") {{projectInfo.name}}
       div(v-if="projectInfo.media !== null" class="project-wrapper__media")
-        a(v-for="media in projectInfo.media" href="#" targetProject="blank")
-          img(class="project-wrapper__icon" :src="require(`@/assets/icon/${media}.svg`)")
+        a(v-for="media in projectInfo.media" :href="`${media.url}`" target="blank")
+          img(class="project-wrapper__icon" :src="require(`@/assets/icon/${media.name}.svg`)")
       div(class="project-wrapper__description")  {{projectInfo.description}}
       div(class="project-wrapper__button")
           span {{projectInfo.button}}
@@ -17,6 +17,7 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import VanillaTilt from 'vanilla-tilt'
+import { mappingUrl } from '@/utils/utility.js'
 
 export default {
   props: {
@@ -32,6 +33,7 @@ export default {
     this.animProject()
   },
   methods: {
+    mappingUrl,
     mapProjectImg () {
       return require(`@/assets/img/${this.projectInfo.cover}`)
     },
