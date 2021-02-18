@@ -8,8 +8,8 @@ div(class="home")
   contact
   div(class="bottom")
     div(class="bottom__icon-set")
-      a(href="#")
-        img(v-for="icon in icons" class="bottom__icon" :src="require(`@/assets/icon/${icon}.svg`)")
+      a(v-for="icon in icons" href="#")
+        div(class="bottom__icon" :style="{'mask-image': `url(${mappingIcon(icon)})`}")
     div(class="bottom__copyright") Copyright © 2021 - Alan Chang
 </template>
 
@@ -41,8 +41,9 @@ export default {
     }
   },
   methods: {
-    test () {
-
+    mappingIcon (icon) {
+      console.log(require(`@/assets/icon/${icon}.svg`))
+      return require(`@/assets/icon/${icon}.svg`)
     }
   }
 }
@@ -77,9 +78,11 @@ export default {
     &__icon {
       @include size(20px);
       margin: 1px 20px 0px 20px;
-      transition: transform 0.3s;
+      background-color: setColor(text-color);
+      transition: transform 0.3s, color 0.2s;
       &:hover {
-        transform: scale(1.5);
+        transform: scale(1.2);
+        background-color: setColor(white);
       }
     }
     &__copyright {

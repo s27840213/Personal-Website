@@ -58,7 +58,8 @@ export default {
         opacity: 0,
         x: 0,
         onStart: animatePseudo,
-        onStartParams: ['.right__heading']
+        onStartParams: ['.right__heading'],
+        clearProps: 'all'
       }, '-=0.5')
       .from('.right__education', {
         duration: 0.7,

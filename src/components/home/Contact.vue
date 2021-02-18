@@ -83,15 +83,6 @@ export default {
     left: 0;
     background-color: setColor(text-color, 0.6);
   }
-  &__heading {
-    @include heading;
-    font-size: 3rem;
-    margin-bottom: 30px;
-    &.animatePseudo::after {
-      transition-delay: 0.25s;
-      width: 25%;
-    }
-  }
   &-info {
     display: grid;
     justify-content: center;
@@ -103,6 +94,9 @@ export default {
       margin: 10px;
       > img {
         @include size(30px);
+        @include mobileStyle {
+          @include size(20px);
+        }
         margin-right: 20px;
         transition: 0.6s;
       }
@@ -112,6 +106,9 @@ export default {
       span {
         color: setColor(white);
         font-size: 1.5rem;
+        @include mobileStyle {
+          font-size: 1rem;
+        }
         font-weight: bold;
         transition: 0.6s;
         position: relative;

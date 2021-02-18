@@ -1,9 +1,9 @@
 <template lang="pug">
-  //- div(class="navbar" :class="{ 'navbar--hidden': !showNavbar}" :style="{'background-color' : atTop ? '#2d112b' : 'transparent', 'color' : atTop ? 'white' : 'white'}")
   div(class="navbar"  :style="{'background-color' : atTop ? '#2d112b' : 'transparent', 'color' : atTop ? 'white' : 'white'}")
     div(class="navbar__item" v-for="item in navList "
       @click="loading(item)")
       span {{item}}
+    //- for mobile
     div(class="navbar__menu-button" @click="toggleMenu")
     div(v-if="menuOpened" class="navbar__menu")
       div(class="navbar__mbitem" v-for="item in navList "
@@ -24,7 +24,7 @@ export default {
       curr: this.defaultSelected ? this.defaultSelected : this.navList[0],
       lastScrollPosition: 0,
       atTop: true,
-      menuOpened: false
+      menuOpened: true
     }
   },
   computed: {
@@ -112,6 +112,9 @@ export default {
     padding: 10px 10px;
   }
   &__item {
+    @include mobileStyle {
+      display: none;
+    }
     position: relative;
     font-size: 1.2rem;
     margin: 0 20px;
@@ -141,8 +144,36 @@ export default {
     }
   }
   &__menu {
-    @include size(40px);
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    transform: translate3d(0, 100%, 0);
+    background: setColor(secondary);
+    font-size: 1.5rem;
+  }
+  &__mbitem {
+    &:nth-child(n) {
+      position: relative;
+      padding: 10px;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+        width: 80%;
+        height: 1px;
+        background-color: setColor(text-color, 0.2);
+      }
+    }
+  }
+  &__menu-button {
+    @include size(30px);
     background-color: white;
+    @include pcStyle {
+      display: none;
+    }
   }
   &--hidden {
     transform: translate3d(0, -100%, 0);

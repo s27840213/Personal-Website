@@ -39,22 +39,28 @@
 @mixin heading {
   font-size: 5rem;
   position: relative;
-  @include pcStyle {
-    margin-bottom: 100px;
-  }
-  @include mobileStyle {
-    margin-bottom: 3【0px;
-  }
   &::after {
     content: "";
     position: absolute;
     left: 50%;
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0) scale(0);
     bottom: -10px;
     background-color: setColor(text-color);
-    width: 0px;
-    height: 5px;
     transition: 1s;
+  }
+  @include pcStyle {
+    margin-bottom: 100px;
+    &::after {
+      width: 30vw;
+      height: 5px;
+    }
+  }
+  @include mobileStyle {
+    margin-bottom: 30px;
+    &::after {
+      width: 100vw;
+      height: 2px;
+    }
   }
 }
 @mixin glass($br: 10px) {
@@ -86,7 +92,7 @@ body {
     font-size: 16px;
   }
   @include mobileStyle {
-    font-size: 8px;
+    font-size: 12px;
   }
 }
 
