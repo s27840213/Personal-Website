@@ -10,7 +10,7 @@
 <script>
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { animatePseudo } from '@/utils/utility.js'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 import VanillaTilt from 'vanilla-tilt'
 export default {
   mounted () {

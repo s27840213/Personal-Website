@@ -18,7 +18,7 @@
 <script>
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { animatePseudo } from '@/utils/utility.js'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 import VanillaTilt from 'vanilla-tilt'
 export default {
   data () {
@@ -73,11 +73,13 @@ export default {
         opacity: 0,
         x: -50
       }, '-=0.5')
-    VanillaTilt.init(document.querySelectorAll('.left'), {
-      max: 5,
-      speed: 1000,
-      scale: 1.05
-    })
+    if (!isMobile) {
+      VanillaTilt.init(document.querySelectorAll('.left'), {
+        max: 5,
+        speed: 1000,
+        scale: 1.05
+      })
+    }
   }
 }
 </script>

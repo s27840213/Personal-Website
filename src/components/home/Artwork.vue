@@ -15,7 +15,7 @@
 <script>
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { animatePseudo } from '@/utils/utility.js'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 import VanillaTilt from 'vanilla-tilt'
 
 import { mapState } from 'vuex'
@@ -72,14 +72,15 @@ export default {
     this.isoAnim = this.isoAnimation()
 
     // handle tilt animation
-
-    VanillaTilt.init(document.querySelectorAll('.iso-building'), {
-      max: 10,
-      speed: 600,
-      scale: 1.05,
-      glare: 1,
-      'max-glare': 0.2
-    })
+    if (!isMobile()) {
+      VanillaTilt.init(document.querySelectorAll('.iso-building'), {
+        max: 10,
+        speed: 600,
+        scale: 1.05,
+        glare: 1,
+        'max-glare': 0.2
+      })
+    }
   },
   computed: {
     ...mapState({

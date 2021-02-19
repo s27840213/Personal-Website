@@ -17,7 +17,7 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import VanillaTilt from 'vanilla-tilt'
-import { mappingUrl } from '@/utils/utility.js'
+import { mappingUrl, isMobile } from '@/utils/utility.js'
 
 export default {
   props: {
@@ -51,12 +51,14 @@ export default {
           x: -100,
           opacity: 0,
           onComplete: () => {
-            VanillaTilt.init(targetProject.querySelector('.project-wrapper__img'), {
-              max: 5,
-              reverse: true,
-              speed: 400,
-              scale: 1.05
-            })
+            if (!isMobile) {
+              VanillaTilt.init(targetProject.querySelector('.project-wrapper__img'), {
+                max: 5,
+                reverse: true,
+                speed: 400,
+                scale: 1.05
+              })
+            }
           }
         })
         .from(targetProject.querySelector('.project-wrapper__index'), {

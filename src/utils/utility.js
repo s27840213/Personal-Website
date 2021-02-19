@@ -20,13 +20,13 @@ function mappingUrl (target) {
       return 'https://codepen.io/collection/AMdQPg?sort_by=id&cursor=ZD0wJm89MCZwPTEmdj03MDQ4Nzcx'
   }
 }
-function test () {
+function isMobile () {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     // true for mobile device
-    console.log('mobile device')
+    return true
   } else {
     // false for not mobile device
-    console.log('not mobile device')
+    return false
   }
 }
-export { getStyles, animatePseudo, mappingUrl }
+export { getStyles, animatePseudo, mappingUrl, isMobile }
