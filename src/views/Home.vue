@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     mappingIcon (icon) {
-      console.log(require(`@/assets/icon/${icon}.svg`))
       return require(`@/assets/icon/${icon}.svg`)
     },
     mappingUrl

@@ -5,14 +5,16 @@
       div(class="left__info")
         div(class="left__zhname") Tapei, Taiwan
         div(class="left__enname") Yu-Chen Chang
-        div(class="left__job") - Junior Front-end Developer | Web Designer -
+        div(class="left__job") - Front-end Developer | Web Designer -
         //- img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
     div(class="right")
       div(class="right__heading") About Me
-      div(class="right__education")
-        img(:src="require('@/assets/icon/education.svg')")
-        span National Cheng Kung University (Sep. 2016 – Jun. 2020) #[br] B.S in Computer Science and Infomation Engineering
-      div(class="right__content") Kyronus is a simulation mobile game which connects  to the real world with Gamification. Kyronus allows players to collect and build those famous tourist attractions in Taiwan on their own planet! We hope Kyronus could enhance player’s understanding  of the local culture of Taiwan .
+      //- div(class="right__education")
+      //-   img(:src="require('@/assets/icon/education.svg')")
+      //-   span National Cheng Kung University (Sep. 2016 – Jun. 2020) #[br] B.S in Computer Science and Infomation Engineering
+      div(class="right__content")
+        p I graduated from National Cheng Kung University (成功大學) with a master degree in Industrial Design. I founded a game studio during my graduate study. I'm responsible for both design and development, acting as a bridge between the two department. This experience gave me agile development mindset and teamwork ability.
+        p I love APP development, so in addition to my original design ability, I have learned web technology and iOS software development. Combining what I have learned in the two field is my advantage. I can understand the thinking of designers and engineers, which can accelerate the operation of the team. I believe that having diverse skills can help the company.
 </template>
 
 <script>

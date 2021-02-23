@@ -282,11 +282,13 @@ export default {
         align-items: center;
         position: relative;
         padding: 20px;
-        transform-style: preserve-3d;
-        transform: perspective(1000px);
-        &:hover {
-          .iso-building__img {
-            transform: translateZ(20px) scale(1.1);
+        @include pcStyle {
+          transform-style: preserve-3d;
+          transform: perspective(1000px);
+          &:hover {
+            .iso-building__img {
+              transform: translateZ(20px) scale(1.1);
+            }
           }
         }
         &__img {
