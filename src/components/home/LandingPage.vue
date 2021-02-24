@@ -96,7 +96,7 @@ export default {
   watch: {
     getIsLoading () {
       if (this.getIsLoading) {
-        this.landingPageAnim.paused()
+        this.landingPageAnim.pause()
       } else {
         if (this.hasPlayed) {
           // this.landingPageAnim.restart()

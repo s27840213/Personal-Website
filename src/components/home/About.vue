@@ -13,8 +13,7 @@
       //-   img(:src="require('@/assets/icon/education.svg')")
       //-   span National Cheng Kung University (Sep. 2016 – Jun. 2020) #[br] B.S in Computer Science and Infomation Engineering
       div(class="right__content")
-        p I graduated from National Cheng Kung University (成功大學) with a master degree in Industrial Design. I founded a game studio during my graduate study. I'm responsible for both design and development, acting as a bridge between the two department. This experience gave me agile development mindset and teamwork ability.
-        p I love APP development, so in addition to my original design ability, I have learned web technology and iOS software development. Combining what I have learned in the two field is my advantage. I can understand the thinking of designers and engineers, which can accelerate the operation of the team. I believe that having diverse skills can help the company.
+        p I graduated from National Cheng Kung University with Bachelor's degree in computer science and information engineering. I’m a self-motivated programmer and designer who is passionate about exploring new trend in both fields through self-study. Currently I’ve work for CityChaser, an independent game studio in Taiwan, as an front-end engineer and game art designer for over 1 year.
 </template>
 
 <script>
@@ -65,11 +64,6 @@ export default {
         onStartParams: ['.right__heading'],
         clearProps: 'all'
       }, '-=0.5')
-      .from('.right__education', {
-        duration: 0.7,
-        opacity: 0,
-        x: -50
-      }, '-=0.5')
       .from('.right__content', {
         duration: 0.7,
         opacity: 0,
@@ -105,14 +99,14 @@ export default {
         width: clamp(300px, 100%, 100%);
         height: 60vh;
         box-sizing: border-box;
-        clip-path: polygon(
-          100% 0%,
-          90% 50%,
-          100% 100%,
-          25% 100%,
-          15% 50%,
-          25% 0%
-        );
+        // clip-path: polygon(
+        //   100% 0%,
+        //   90% 50%,
+        //   100% 100%,
+        //   25% 100%,
+        //   15% 50%,
+        //   25% 0%
+        // );
         background-image: linear-gradient(
             to top,
             setColor(primary) 0%,
@@ -158,20 +152,21 @@ export default {
         font-weight: 800;
         transform: translateX(-30%);
         position: relative;
+        white-space: nowrap;
         &::after {
           content: "";
           position: absolute;
-          width: 0px;
+          width: 100%;
           height: 5px;
           bottom: 0px;
           left: 0px;
           background-color: setColor(text-color);
           transform-origin: left;
+          transform: scaleX(0);
           transition: 1s;
         }
         &.animatePseudo::after {
-          transition-delay: 0.5s;
-          width: 80%;
+          transform: scaleX(1);
         }
       }
       &__education {

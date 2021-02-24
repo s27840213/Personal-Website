@@ -7,11 +7,11 @@
         span s27840213@gmail.com
       div(class="contact-info__approach")
         img(:src="require('@/assets/icon/fb.svg')")
-        a(href="")
+        a(:href="`${mappingUrl('fb')}`" target="blank")
           span Facebook
       div(class="contact-info__approach")
         img(:src="require('@/assets/icon/ig.svg')")
-        a(href="")
+        a(:href="`${mappingUrl('ig')}`" target="blank")
           span Instagram
 </template>
 
@@ -19,7 +19,8 @@
 import VanillaTilt from 'vanilla-tilt'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { animatePseudo, isMobile } from '@/utils/utility.js'
+import { animatePseudo, isMobile, mappingUrl } from '@/utils/utility.js'
+
 export default {
   data () {
     return {
@@ -36,19 +37,19 @@ export default {
     })
       .from('.contact', {
         duration: this.animSpeed,
-        y: 100,
+        y: 50,
         opacity: 0
       })
       .from('.contact__heading', {
         duration: this.animSpeed,
-        y: 100,
+        y: 50,
         opacity: 0,
         onStart: animatePseudo,
         onStartParams: ['.contact__heading']
       }, '-=0.3')
       .from('.contact-info__approach', {
         duration: this.animSpeed * 0.7,
-        y: 100,
+        y: 50,
         opacity: 0,
         stagger: 0.3
       }, '-=0.3')
@@ -58,6 +59,9 @@ export default {
         speed: 200
       })
     }
+  },
+  methods: {
+    mappingUrl
   }
 }
 </script>

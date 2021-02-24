@@ -9,7 +9,7 @@
         a(v-for="media in projectInfo.media" :href="`${media.url}`" target="blank")
           img(class="project-wrapper__icon" :src="require(`@/assets/icon/${media.name}.svg`)")
       div(class="project-wrapper__description")  {{projectInfo.description}}
-      div(class="project-wrapper__button")
+      div(class="project-wrapper__button" @click="projectInfo.buttonCallback")
           span {{projectInfo.button}}
 </template>
 

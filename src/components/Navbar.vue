@@ -209,6 +209,7 @@ export default {
     opacity: 0;
   }
   &__mbitem {
+    cursor: pointer;
     &:nth-child(n) {
       position: relative;
       padding: 10px;

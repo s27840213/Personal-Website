@@ -21,14 +21,14 @@
 @mixin pdGeneral() {
   box-sizing: border-box;
   @include pcStyle {
-    padding: 60px calc((100vw - 1100px) / 2);
+    padding: 60px calc(30px + (100vw - 1100px) / 2);
   }
   @include mobileStyle {
-    padding: 20px calc((100vw - 1100px) / 2);
+    padding: 20px calc(30px (100vw - 1100px) / 2);
   }
 }
 @mixin pdGeneralHr() {
-  padding: 0px calc((100vw - 1100px) / 2);
+  padding: 0px calc(30px + (100vw - 1100px) / 2);
   box-sizing: border-box;
 }
 
@@ -47,6 +47,10 @@
     bottom: -10px;
     background-color: setColor(text-color);
     transition: 1s;
+  }
+  &.animatePseudo::after {
+    transition-delay: 0.25s;
+    transform: translate3d(-50%, 0, 0) scale(1);
   }
   @include pcStyle {
     margin-bottom: 100px;
@@ -100,4 +104,9 @@ h2 {
   font-size: 2rem;
   margin: 0px;
   margin-bottom: 1rem;
+}
+.animatePseudo {
+  &::after {
+    transform: scaleX(1);
+  }
 }

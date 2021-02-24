@@ -72,7 +72,7 @@ export default {
   }
   &__bar {
     @include size(5px, 65px);
-    background-color: white;
+    background-color: setColor(text-color);
     margin: 5px;
   }
 }

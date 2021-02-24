@@ -101,7 +101,7 @@ export default {
     @include heading;
     &.animatePseudo::after {
       transition-delay: 0.25s;
-      width: 25%;
+      transform: translate3d(-50%, 0, 0) scale(1);
     }
   }
   .skill-set {
