@@ -7,6 +7,8 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Loading from '@/components/Loading.vue'
+import { inKyronus } from '@/utils/utility.js'
+
 export default {
   components: {
     Navbar,
@@ -16,6 +18,7 @@ export default {
     document.addEventListener('click', this.clickEffect)
   },
   methods: {
+    inKyronus,
     clickEffect: function (e) {
       const d = document.createElement('div')
       d.className = 'clickEffect'
@@ -26,6 +29,9 @@ export default {
         d.parentElement.removeChild(d)
         d.removeEventListener('animationend', this)
       })
+    },
+    goBack () {
+      this.router.push({ name: 'Home' })
     }
   }
 }
@@ -52,6 +58,7 @@ export default {
     border-width: 0.03em;
   }
 }
+
 .clickEffect {
   position: fixed;
   width: 100px;

@@ -1,5 +1,7 @@
 <template lang="pug">
 div(class="kyronus")
+  div(class="back-button" @click="goBack()")
+    img(:src="require('@/assets/icon/back.svg')")
   kyronus-landing-page
   kyronus-intro
   navagation-map
@@ -75,6 +77,9 @@ export default {
         case 'behance':
           return 'https://www.behance.net/leokuo'
       }
+    },
+    goBack () {
+      this.$router.go(-1)
     }
   },
   mounted () {
@@ -112,6 +117,7 @@ export default {
 .kyronus {
   display: flex;
   flex-direction: column;
+  position: relative;
   background-color: setKyColor(bg);
   overflow: hidden;
   > div::v-deep {
@@ -212,6 +218,27 @@ export default {
     > a {
       color: setKyColor(brown);
     }
+  }
+}
+
+.back-button {
+  @include size(40px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  margin: 40px;
+  padding: 10px;
+  border: 2px solid rgba(white, 0.4);
+  border-radius: 50%;
+  background-color: rgba(black, 0.4);
+  cursor: pointer;
+  z-index: setZindex("navbar");
+  > img {
+    @include size(30px);
+    opacity: 0.8;
   }
 }
 </style>
