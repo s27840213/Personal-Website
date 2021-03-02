@@ -6,7 +6,6 @@
         div(class="left__zhname") Tapei, Taiwan
         div(class="left__enname") Yu-Chen Chang
         div(class="left__job") - Front-end Developer | Web Designer -
-        //- img(class="myinfo__avatar" :src="require('@/assets/img/person.jpg')")
     div(class="right")
       div(class="right__heading") About Me
       //- div(class="right__education")

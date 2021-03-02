@@ -62,7 +62,7 @@ export default {
   border-radius: 50%;
   animation: clickEffect 0.4s ease-in-out;
   transform-origin: center;
-  z-index: 99999;
+  z-index: 1000;
   will-change: opacity, transform, border-width;
   pointer-events: none;
 }

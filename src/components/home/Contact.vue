@@ -4,7 +4,8 @@
     div(class="contact-info")
       div(class="contact-info__approach")
         img(:src="require('@/assets/icon/email.svg')")
-        span s27840213@gmail.com
+        a(href="mailto:s27840213@gmail.com")
+          span s27840213@gmail.com
       div(class="contact-info__approach")
         img(:src="require('@/assets/icon/fb.svg')")
         a(:href="`${mappingUrl('fb')}`" target="blank")

@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="navbar"  :style="{'background-color' : atTop ? '#2d112b' : 'transparent', 'color' : atTop ? 'white' : 'white'}")
+  div(v-if="!inKyronus()" class="navbar"  :style="{'background-color' : atTop ? '#2d112b' : 'transparent', 'color' : atTop ? 'white' : 'white'}")
     div(class="navbar__item" v-for="item in navList "
       @click="loading(item,'pc')")
       span {{item}}
@@ -16,11 +16,10 @@
 </template>
 
 <script>
-import { getStyles } from '@/utils/utility.js'
+import { getStyles, inKyronus } from '@/utils/utility.js'
 import { mapGetters, mapMutations } from 'vuex'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-
 export default {
   props: {
     navList: Array,
@@ -33,6 +32,9 @@ export default {
       atTop: true,
       navAnim: null,
       menuOpened: false,
+      /**
+       * @param {boolean} isAnimating - A boolean value used to prevent from clicking during playing of animation
+       */
       isAnimating: false
     }
   },
@@ -46,12 +48,19 @@ export default {
     })
   },
   methods: {
+    inKyronus,
     ...mapMutations({
       SET_isLoading: 'SET_isLoading',
       SET_scrollTarget: 'SET_scrollTarget'
     }),
     loading (item, type) {
       if (!this.isAnimating) {
+        if (inKyronus) {
+          setTimeout(() => {
+            this.$router.push('/')
+            window.scrollTo({ top: 0 })
+          }, 650)
+        }
         this.SET_isLoading(true)
         if (type === 'mobile') {
           this.toggleMenu()

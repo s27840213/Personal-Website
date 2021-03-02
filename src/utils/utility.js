@@ -29,4 +29,8 @@ function isMobile () {
     return false
   }
 }
-export { getStyles, animatePseudo, mappingUrl, isMobile }
+
+function inKyronus (path) {
+  return this.$route.path === '/kyronus'
+}
+export { getStyles, animatePseudo, mappingUrl, isMobile, inKyronus }

@@ -40,7 +40,7 @@ export default {
       if (this.getIsLoading) {
         setTimeout(() => {
           this.SET_isLoading(false)
-        }, 1250)
+        }, 1500)
       }
     }
   },

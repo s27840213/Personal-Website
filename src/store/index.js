@@ -81,9 +81,7 @@ export default new Vuex.Store({
         }],
         description: 'Kyronus is a simulation mobile game which connects  to the real world with Gamification. Kyronus allows players to collect and build those famous tourist attractions in Taiwan on their own planet! We hope Kyronus could enhance player’s understanding  of the local culture of Taiwan .',
         button: 'more info',
-        buttonCallback: () => {
-
-        },
+        buttonCallback: null,
         cover: 'kyronus.png'
       },
       {

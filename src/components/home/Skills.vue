@@ -99,10 +99,6 @@ export default {
 
   &__heading {
     @include heading;
-    &.animatePseudo::after {
-      transition-delay: 0.25s;
-      transform: translate3d(-50%, 0, 0) scale(1);
-    }
   }
   .skill-set {
     background-color: setColor(secondary, 0.4);

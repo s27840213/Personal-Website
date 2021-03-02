@@ -9,7 +9,7 @@
         a(v-for="media in projectInfo.media" :href="`${media.url}`" target="blank")
           img(class="project-wrapper__icon" :src="require(`@/assets/icon/${media.name}.svg`)")
       div(class="project-wrapper__description")  {{projectInfo.description}}
-      div(class="project-wrapper__button" @click="projectInfo.buttonCallback")
+      div(class="project-wrapper__button" @click="projectInfo.name === 'Kyronus' ? goTo('/kyronus') :projectInfo.buttonCallback()")
           span {{projectInfo.button}}
 </template>
 
@@ -18,6 +18,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import VanillaTilt from 'vanilla-tilt'
 import { mappingUrl, isMobile } from '@/utils/utility.js'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -33,6 +34,10 @@ export default {
     this.animProject()
   },
   methods: {
+    ...mapMutations({
+      SET_isLoading: 'SET_isLoading',
+      SET_scrollTarget: 'SET_scrollTarget'
+    }),
     mappingUrl,
     mapProjectImg () {
       return require(`@/assets/img/${this.projectInfo.cover}`)
@@ -95,6 +100,10 @@ export default {
           x: -100,
           opacity: 0
         }, '-=0.5')
+    },
+    goTo (path) {
+      this.SET_isLoading(true)
+      setTimeout(() => this.$router.push(path), 300)
     }
   }
 }

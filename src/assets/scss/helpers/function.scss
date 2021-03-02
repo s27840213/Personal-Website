@@ -5,3 +5,10 @@
 @function setColor($color, $opacity: 1) {
   @return rgba(map-get($colors, $color), $opacity);
 }
+
+@function setKyColor($color, $opacity: 1) {
+  @return rgba(map-get($colors-ky, $color), $opacity);
+}
+@function getKyronusImg($path) {
+  @return url("~@/assets/img/kyronus/"+$path+".png");
+}
