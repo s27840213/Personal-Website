@@ -25,12 +25,14 @@ import { animatePseudo, isMobile, mappingUrl } from '@/utils/utility.js'
 export default {
   data () {
     return {
-      animSpeed: 0.7
+      animSpeed: 0.7,
+      contactAnim: null
     }
   },
   mounted () {
-    const contactAnim = gsap.timeline({
+    this.contactAnim = gsap.timeline({
       scrollTrigger: {
+        id: 'contactAnim',
         trigger: '.contact',
         start: 'top bottom',
         autoRemoveChildren: true
@@ -63,6 +65,10 @@ export default {
   },
   methods: {
     mappingUrl
+  },
+  beforeDestroy () {
+    this.contactAnim.pause(0).kill(true)
+    ScrollTrigger.getById('contactAnim').kill(true)
   }
 }
 </script>

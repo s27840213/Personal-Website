@@ -32,11 +32,54 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 export default {
   data () {
     return {
-      demoImg: []
+      demoImg: [],
+      tl: null
     }
+  },
+  mounted () {
+    this.tl = gsap.timeline({
+      scrollTrigger: {
+        id: 'ky-intro',
+        trigger: '.kyronus-intro',
+        start: 'top bottom',
+        autoRemoveChildren: true
+      }
+    })
+    this.tl.from('.kyronus-intro__img', {
+      duration: 0.7,
+      x: -100,
+      opacity: 0
+    }, 's')
+      .from('.kyronus-intro__heading', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.kyronus-intro__content', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.more-info__trailer', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.more-info__interview', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+  },
+  beforeDestroy () {
+    this.tl.pause(0).kill(true)
+    ScrollTrigger.getById('ky-intro').kill(true)
   }
 }
 </script>

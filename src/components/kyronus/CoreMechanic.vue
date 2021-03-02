@@ -13,15 +13,52 @@
           div(class="decoration")
           span Unlock buildings and game features
     div(class="core-mechanic__demo")
-      img(v-for="img in demoImg" :src="require(`@/assets/img/kyronus/${img}.png`)")
+      img(class="core-mechanic__demo-img" v-for="img in demoImg" :src="require(`@/assets/img/kyronus/${img}.png`)")
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 export default {
   data () {
     return {
-      demoImg: ['planet-scene', 'collect-scene', 'build-mode']
+      demoImg: ['planet-scene', 'collect-scene', 'build-mode'],
+      tl: null
     }
+  },
+  mounted () {
+    this.tl = gsap.timeline({
+      scrollTrigger: {
+        id: 'core-mechanic',
+        trigger: '.core-mechanic__info',
+        start: 'top bottom',
+        autoRemoveChildren: true
+      }
+    })
+    this.tl.from('.core-mechanic__info', {
+      duration: 0.7,
+      x: -100,
+      opacity: 0
+    }, 's')
+      .from('.core-mechanic__step', {
+        duration: 0.7,
+        opacity: 0,
+
+        x: -50
+      }, '-=0.5')
+      .from('.core-mechanic__demo-img', {
+        duration: 0.7,
+        opacity: 0,
+        stagger: {
+          amount: 0.5
+        },
+        x: -50
+      }, '-=0.5')
+  },
+  beforeDestroy () {
+    this.tl.pause(0).kill(true)
+    ScrollTrigger.getById('core-mechanic').kill(true)
   }
 }
 </script>

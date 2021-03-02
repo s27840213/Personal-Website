@@ -30,13 +30,42 @@
               div We converted interview recordings into transcripts for labeling. Put the labels of the same concept into the same category. Finally got several insights for us to improve our game.
     div(class="ux-research__demo")
 </template>
+      demoImg: ['planet-scene', 'collect-scene', 'build-mode']
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 export default {
   data () {
     return {
-      demoImg: ['planet-scene', 'collect-scene', 'build-mode']
+      demoImg: ['planet-scene', 'collect-scene', 'build-mode'],
+      tl: null
     }
+  },
+  mounted () {
+    this.tl = gsap.timeline({
+      scrollTrigger: {
+        id: 'research',
+        trigger: '.ux-research__info',
+        start: 'top bottom',
+        autoRemoveChildren: true
+      }
+    })
+    this.tl.from('.ux-research__info', {
+      duration: 0.7,
+      x: -100,
+      opacity: 0
+    }, 's')
+      .from('.ux-research__demo', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.3')
+  },
+  beforeDestroy () {
+    this.tl.pause(0).kill(true)
+    ScrollTrigger.getById('research').kill(true)
   }
 }
 </script>

@@ -1,22 +1,59 @@
 <template lang="pug">
   div(class="game-art-design")
     div(class="building-section")
-      img(v-for="i in 5" :src="require(`@/assets/img/kyronus/building-${i-1}.png`)")
-    div(class="bottom-section")
-      div(class="bottom-section__color")
+      img(class="building-img" v-for="i in 5" :src="require(`@/assets/img/kyronus/building-${i-1}.png`)")
+    div(class="art-bottom-section")
+      div(class="art-bottom-section__color")
         img(:src="require('@/assets/img/kyronus/color.png')")
-      div(class="bottom-section__info")
+      div(class="art-bottom-section__info")
         span(class="heading-ky-r") Game Art Design
-        div(class="bottom-section__content")
-          div(class="bottom-section__paragraph") The overall art adopts isometric and low poly styles. The architecture is presented through a fresh style, while bringing comfort to players !
-          div(class="bottom-section__paragraph") We capture the essence of the realistic characteristic building, and only retain the most important feature items to present the original delicate, mini, and cute appearance.
+        div(class="art-bottom-section__content")
+          div(class="art-bottom-section__paragraph") The overall art adopts isometric and low poly styles. The architecture is presented through a fresh style, while bringing comfort to players !
+          div(class="art-bottom-section__paragraph") We capture the essence of the realistic characteristic building, and only retain the most important feature items to present the original delicate, mini, and cute appearance.
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 export default {
   data () {
     return {
+      demoImg: ['planet-scene', 'collect-scene', 'build-mode'],
+      tl: null
     }
+  },
+  mounted () {
+    this.tl = gsap.timeline({
+      scrollTrigger: {
+        id: 'art-design',
+        trigger: '.building-section',
+        start: 'top bottom',
+        autoRemoveChildren: true
+      }
+    })
+    this.tl.from('.building-img', {
+      duration: 0.7,
+      scale: 0,
+      ease: 'back.out',
+      stagger: {
+        amount: 0.7
+      }
+    }, '-=0.3')
+      .from('.art-bottom-section__color', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.3')
+      .from('.art-bottom-section__info', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.3')
+  },
+  beforeDestroy () {
+    this.tl.pause(0).kill(true)
+    ScrollTrigger.getById('art-design').kill(true)
   }
 }
 </script>
@@ -40,7 +77,7 @@ export default {
     width: 100%;
   }
 }
-.bottom-section {
+.art-bottom-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
@@ -69,10 +106,10 @@ export default {
     @include mobileStyle {
       align-items: center;
     }
-    .bottom-section__content {
+    .art-bottom-section__content {
       margin-top: 30px;
     }
-    .bottom-section__paragraph {
+    .art-bottom-section__paragraph {
       font-size: 1rem;
       color: setKyColor(text-content);
       line-height: 200%;

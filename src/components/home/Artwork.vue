@@ -26,12 +26,14 @@ export default {
       currIndex: 0,
       isoAnim: null,
       isAnimating: false,
-      creations: ['obposter.png', 'lebron.png', 'annie.png', 'oblogo.png', 'poster.png', 'soc.png']
+      creations: ['obposter.png', 'lebron.png', 'annie.png', 'oblogo.png', 'poster.png', 'soc.png'],
+      artworkAnim: null
     }
   },
   mounted () {
-    const artworkAnim = gsap.timeline({
+    this.artworkAnim = gsap.timeline({
       scrollTrigger: {
+        id: 'artworkAnim',
         trigger: '.artwork',
         start: 'top bottom',
         autoRemoveChildren: true
@@ -50,16 +52,11 @@ export default {
     })
 
     let creations = document.querySelectorAll('.creation__container')
-    const creationAnim = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.creation',
-        start: 'top bottom'
-      }
-    })
     creations.forEach((creation, index) => {
       let direction = index % 2 === 0 ? -1 : 1
       gsap.to(creation, {
         scrollTrigger: {
+          id: 'creation',
           trigger: '.creation',
           start: 'top bottom',
           end: 'bottom top',
@@ -93,6 +90,7 @@ export default {
       targets.forEach(target => {
         const tl = gsap.timeline({
           scrollTrigger: {
+            id: 'iso',
             trigger: target,
             start: 'top bottom',
             maker: true,
@@ -107,6 +105,11 @@ export default {
           }, '-=0.4')
       })
     }
+  },
+  beforeDestroy () {
+    this.artworkAnim.pause(0).kill(true)
+    ScrollTrigger.getById('artworkAnim').kill(true)
+    ScrollTrigger.getById('iso').kill(true)
   }
 }
 </script>

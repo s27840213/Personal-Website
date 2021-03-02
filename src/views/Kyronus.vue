@@ -19,16 +19,12 @@ div(class="kyronus")
         span iOS developer | UIUX designer | Frontend developerp
       div
         div(class="leo-section__icon-set")
-          a(v-for="icon in leoIcons" :href="`${mappingLeoUrl(icon)}`" target="blank")
-            div(class="leo-section__icon" :style="{'mask-image': `url(${mappingIcon(icon)})`}")
+          a(class="leo-section__icon" v-for="icon in leoIcons" :href="`${mappingLeoUrl(icon)}`" target="blank")
+            div(:style="{'mask-image': `url(${mappingIcon(icon)})`}")
         div(class="leo-section__email")
           a(href="mailto:p900372012@gmail.com")
             span p900372012@gmail.com
-  div(class="bottom")
-    div(class="bottom__icon-set")
-      a(v-for="icon in icons" :href="`${mappingUrl(icon)}`" target="blank")
-        div(class="bottom__icon" :style="{'mask-image': `url(${mappingIcon(icon)})`}")
-    div(class="bottom__copyright") Copyright © 2021 - Alan Chang
+  footer-info(:bgColor="'#957381'" :iconColor="'#f9f3e7'")
 </template>
 
 <script>
@@ -41,7 +37,9 @@ import UIGuideline from '@/components/kyronus/UIGuideline.vue'
 import UxResearch from '@/components/kyronus/UxResearch.vue'
 import GameArtDesign from '@/components/kyronus/GameArtDesign.vue'
 import { mappingUrl } from '@/utils/utility.js'
-
+import FooterInfo from '@/components/FooterInfo.vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 export default {
   name: 'Home',
   components: {
@@ -52,7 +50,8 @@ export default {
     UxResearch,
     GameArtDesign,
     KyronusIntro,
-    CoreMechanic
+    CoreMechanic,
+    FooterInfo
   },
   data () {
     return {
@@ -80,6 +79,31 @@ export default {
   },
   mounted () {
     window.scrollTo(0, 0)
+    this.tl = gsap.timeline({
+      scrollTrigger: {
+        id: 'leo',
+        trigger: '.leo-section',
+        start: 'top bottom',
+        autoRemoveChildren: true
+      }
+    })
+    this.tl.from('.leo-section__avatar', {
+      duration: 0.7,
+      x: -100,
+      opacity: 0
+    }, 's')
+      .from('.leo-section__info', {
+        duration: 0.7,
+        opacity: 0,
+        stagger: {
+          amount: 0.5
+        },
+        x: -50
+      }, '-=0.2')
+  },
+  beforeDestroy () {
+    this.tl.pause(0).kill(true)
+    ScrollTrigger.getById('leo').kill(true)
   }
 }
 </script>
@@ -174,12 +198,14 @@ export default {
     column-gap: 15px;
   }
   &__icon {
-    @include size(20px);
-    margin: 10px 0px;
-    background-color: setKyColor(brown);
-    transition: background-color 0.3s;
-    &:hover {
-      background-color: lighten($color: setColor(brown), $amount: 10);
+    > div {
+      @include size(20px);
+      margin: 10px 0px;
+      background-color: setKyColor(brown);
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: lighten($color: setColor(brown), $amount: 10);
+      }
     }
   }
   &__email {

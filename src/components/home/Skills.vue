@@ -41,12 +41,14 @@ export default {
       skillMain: ['HTML/Pug', 'CSS / SASS/ SCSS', 'Javascript', 'Python', 'Vue / Vuex / Vue-router / Vue-Cli', 'GSAP', 'Ajax (axios)', 'RWD'],
       skillSecondary: ['C/C++/C#', 'Java', 'jQuery', 'Webpack', 'Echart.js/Canvas', 'Unity', 'Phaser.js'],
       skillDesign: ['Photoshop', 'Illustrator', 'After Effect', 'Figma', 'Adobe XD', 'Texture Packer', 'Eagle'],
-      animSpeed: 0.7
+      animSpeed: 0.7,
+      skillAnim: null
     }
   },
   mounted () {
-    const skillAnim1 = gsap.timeline({
+    this.skillAnim = gsap.timeline({
       scrollTrigger: {
+        id: 'skillAnim',
         trigger: '.skill__heading',
         start: 'top bottom',
         autoRemoveChildren: true
@@ -58,10 +60,10 @@ export default {
       onStart: animatePseudo,
       onStartParams: ['.skill__heading']
     })
-    skillAnim1.add(this.animateskill())
+    this.skillAnim.add(this.animateSkill())
   },
   methods: {
-    animateskill () {
+    animateSkill () {
       const tl = gsap.timeline()
         .from('.skill-set__img', {
           duration: this.animSpeed,
@@ -73,11 +75,6 @@ export default {
           opacity: 0,
           x: 100
         }, '-=0.5')
-        .from('.skill-set__description', {
-          duration: this.animSpeed,
-          opacity: 0,
-          x: -50
-        }, '-=0.5')
         .from('.skill-set__tool', {
           duration: 0.5,
           opacity: 0,
@@ -88,6 +85,10 @@ export default {
         }, '-=0.5')
       return tl
     }
+  },
+  beforeDestroy () {
+    this.skillAnim.pause(0).kill(true)
+    ScrollTrigger.getById('skillAnim').kill(true)
   }
 }
 </script>
@@ -159,13 +160,6 @@ export default {
         bottom: 0;
         background-color: setColor(text-color);
       }
-    }
-    &__description {
-      padding: 20px 0px;
-      padding-right: clamp(20px, 5vw, 50px);
-      font-weight: bold;
-      color: setColor(text-color);
-      line-height: 200%;
     }
     &__skill {
       display: flex;

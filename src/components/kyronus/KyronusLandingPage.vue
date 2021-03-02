@@ -7,13 +7,85 @@
       div(class="main-scene__info")
         img(class="main-scene__logo" :src="require('@/assets/img/kyronus/logo.png')")
         div(class="main-scene__slogan")
-          span 在你的城市
-          br
-          span 開拓屬於你的城市
+          div(class="slogan")
+            span 在你的城市
+          div(class="slogan")
+            span 開拓屬於你的城市
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
+  data () {
+    return {
+      animSpeed: 0.7,
+      tl: null
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getIsLoading: 'getIsLoading'
+    })
+  },
+  watch: {
+    getIsLoading () {
+      if (this.getIsLoading) {
+        this.tl.pause()
+      } else {
+        if (this.hasPlayed) {
+          // this.tl.restart()
+        } else {
+          this.tl.play()
+          this.hasPlayed = true
+        }
+      }
+    }
+  },
+  mounted () {
+    this.tl = gsap.timeline()
+    if (this.getIsLoading) {
+      this.tl.pause()
+    }
+    this.tl.from('.main-scene', {
+      duration: this.animSpeed * 2,
+      scale: 2,
+      ease: 'power4.out'
+    }, 's')
+      .from('.main-scene__building', {
+        duration: this.animSpeed * 3,
+        yPercent: 100,
+        ease: 'power4.out'
+      }, 's-=0.4')
+      .from('.main-scene__flyingship', {
+        duration: this.animSpeed * 3,
+        yPercent: 100,
+        ease: 'power4.out'
+      }, 's-=0.4')
+      .from('.main-scene__duino', {
+        duration: this.animSpeed * 3,
+        yPercent: 100,
+        rotate: 20,
+        ease: 'power4.out'
+      }, '-=1')
+      .from('.main-scene__logo', {
+        duration: this.animSpeed,
+        x: -50,
+        opacity: 0,
+        ease: 'power4.out'
+      }, '-=1.5')
+      .from('.slogan', {
+        duration: this.animSpeed * 1.2,
+        stagger: 0.5,
+        xPercent: -120,
+        opacity: 0,
+        ease: 'power2.out'
+      }, '-=1.2')
+  },
+  beforeDestroy () {
+    this.tl.kill()
+  }
 }
 </script>
 
@@ -30,11 +102,13 @@ export default {
   height: 100%;
   width: 100%;
   position: relative;
+
   &__duino {
     position: absolute;
     bottom: -100px;
     right: -50px;
     width: clamp(200px, 40vw, 400px);
+    transform-origin: bottom right;
     @include mobileStyle {
       bottom: clamp(-50px);
       right: -25px;
@@ -62,6 +136,7 @@ export default {
     align-items: center;
     padding: 50px;
     @include mobileStyle {
+      padding: calc(50px + 10vh) 50px 0 50px;
       flex-direction: column;
       justify-content: center;
     }
@@ -73,8 +148,13 @@ export default {
     text-align: left;
     font-size: clamp(20px, 5vw, 50px);
     padding: clamp(10px, 4vw, 30px);
+    z-index: setZindex("paragraph");
+    overflow: hidden;
     @include mobileStyle {
       text-align: center;
+    }
+    span {
+      text-shadow: map-get($shadow, purple);
     }
   }
 }

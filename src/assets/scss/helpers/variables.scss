@@ -38,8 +38,24 @@ $colors-ky: (
 // );
 
 $shadow: (
-  primary-8: 0 0 8px #94c4d6,
+  purple: 0 0 8px #b06ab3,
 );
+
+// $shadow: (
+//   primary-8: 0 0 8px map-get($colors, #b06ab3),
+//   primary-4: 0 0 4px
+//     rgba(
+//       $color: map-get($colors, primary),
+//       $alpha: 0.8,
+//     ),
+//   secondary-8: 0 0 8px map-get($colors, secondary),
+//   secondary-4: 0 0 4px
+//     rgba(
+//       $color: map-get($colors, secondary),
+//       $alpha: 0.8,
+//     ),
+//   drop: 0 0 4px map-get($colors, $key: red),
+// );
 
 $linear-gradient: (
   primary: linear-gradient(90deg, #0a1b29 30%, #2d6585 100%),

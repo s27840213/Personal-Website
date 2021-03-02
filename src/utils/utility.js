@@ -4,6 +4,7 @@ function getStyles (el, style) {
 }
 
 function animatePseudo (target) {
+  console.log(target)
   document.querySelector(target).classList.add('animatePseudo')
 }
 function mappingUrl (target) {

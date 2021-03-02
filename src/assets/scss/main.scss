@@ -67,7 +67,23 @@
     }
   }
 }
-
+.heading-ky {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: setKyColor(brown);
+  font-weight: bold;
+  white-space: nowrap;
+  position: relative;
+  &::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    bottom: -10px;
+    background-color: setKyColor(brown);
+  }
+}
 .heading-ky-r {
   font-size: clamp(2rem, 5vw, 3rem);
   color: setKyColor(brown);

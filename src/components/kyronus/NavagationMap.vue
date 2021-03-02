@@ -1,5 +1,6 @@
 <template lang="pug">
   div(class="map")
+    div(class="heading-ky") Main UI Navigation Map
     div(class="top-section")
       div(class="top-section__building-feature")
         span Historical Building Feature
@@ -33,15 +34,55 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { animatePseudo, isMobile } from '@/utils/utility.js'
 export default {
-
+  data () {
+    return {
+      demoImg: [],
+      tl: null
+    }
+  },
+  mounted () {
+    this.tl = gsap.timeline({
+      scrollTrigger: {
+        id: 'nav-map',
+        trigger: '.map',
+        start: 'top bottom',
+        autoRemoveChildren: true
+      }
+    })
+    this.tl.from('.top-section__building-feature', {
+      duration: 0.7,
+      x: -100,
+      opacity: 0
+    }, 's')
+      .from('.top-section__play-scene', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50
+      }, '-=0.5')
+      .from('.bottom-section__demo', {
+        duration: 0.7,
+        opacity: 0,
+        x: -50,
+        stagger: {
+          amount: 1.2
+        }
+      }, '-=0.5')
+  },
+  beforeDestroy () {
+    this.tl.pause(0).kill(true)
+    ScrollTrigger.getById('nav-map').kill(true)
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .map {
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto;
   grid-template-columns: 1fr;
   row-gap: calc(20px + 5vw);
   padding: 0px

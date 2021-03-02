@@ -26,12 +26,15 @@ export default {
   },
   data () {
     return {
-      animSpeed: 0.7
+      animSpeed: 0.7,
+      projectAnim: null,
+      practiceAnim: null
     }
   },
   mounted () {
-    const projectAnim = gsap.timeline({
+    this.projectAnim = gsap.timeline({
       scrollTrigger: {
+        id: 'projectAnim',
         trigger: '.project__heading',
         start: 'top bottom',
         autoRemoveChildren: true
@@ -44,15 +47,16 @@ export default {
       onStartParams: ['.project__heading']
     })
 
-    const practiceAnim = gsap.timeline({
+    this.practiceAnim = gsap.timeline({
       scrollTrigger: {
+        id: 'practiceAnim',
         trigger: '.practice',
         start: 'top bottom',
         autoRemoveChildren: true
       }
     })
 
-    practiceAnim.from('.practice', {
+    this.practiceAnim.from('.practice', {
       duration: this.animSpeed,
       y: 100,
       opacity: 0
@@ -70,6 +74,12 @@ export default {
     ...mapState({
       projectInfo: 'projectInfo'
     })
+  },
+  beforeDestroy () {
+    this.projectAnim.pause(0).kill(true)
+    ScrollTrigger.getById('projectAnim').kill(true)
+    this.practiceAnim.pause(0).kill(true)
+    ScrollTrigger.getById('practiceAnim').kill(true)
   }
 }
 </script>

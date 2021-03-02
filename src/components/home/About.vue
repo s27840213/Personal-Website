@@ -23,19 +23,21 @@ import VanillaTilt from 'vanilla-tilt'
 export default {
   data () {
     return {
-      animSpeed: 0.7
+      animSpeed: 0.7,
+      aboutAnim: null
     }
   },
   mounted () {
-    const aboutAnim = gsap.timeline({
+    this.aboutAnim = gsap.timeline({
       scrollTrigger: {
+        id: 'aboutAnim',
         trigger: '.right__heading',
         start: 'bottom bottom',
         autoRemoveChildren: true
       }
 
     })
-    aboutAnim.from('.left__avatar', {
+    this.aboutAnim.from('.left__avatar', {
       duration: 0.7,
       x: -100,
       opacity: 0
@@ -75,6 +77,10 @@ export default {
         scale: 1.05
       })
     }
+  },
+  beforeDestroy () {
+    this.aboutAnim.pause(0).kill(true)
+    ScrollTrigger.getById('aboutAnim').kill(true)
   }
 }
 </script>

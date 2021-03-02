@@ -6,11 +6,12 @@ div(class="home")
   project
   artwork
   contact
-  div(class="bottom")
-    div(class="bottom__icon-set")
-      a(v-for="icon in icons" :href="`${mappingUrl(icon)}`" target="blank")
-        div(class="bottom__icon" :style="{'mask-image': `url(${mappingIcon(icon)})`}")
-    div(class="bottom__copyright") Copyright © 2021 - Alan Chang
+  footer-info
+  //- div(class="bottom")
+  //-   div(class="bottom__icon-set")
+  //-     a(v-for="icon in icons" :href="`${mappingUrl(icon)}`" target="blank")
+  //-       div(class="bottom__icon" :style="{'mask-image': `url(${mappingIcon(icon)})`}")
+  //-   div(class="bottom__copyright") Copyright © 2021 - Alan Chang
 </template>
 
 <script>
@@ -22,6 +23,7 @@ import Contact from '@/components/home/Contact.vue'
 import Project from '@/components/home/Project.vue'
 import Practice from '@/components/home/Practice.vue'
 import Artwork from '@/components/home/Artwork.vue'
+import FooterInfo from '@/components/FooterInfo.vue'
 import { mappingUrl } from '@/utils/utility.js'
 
 export default {
@@ -34,7 +36,8 @@ export default {
     Project,
     Passion,
     Practice,
-    Artwork
+    Artwork,
+    FooterInfo
   },
   data () {
     return {
@@ -64,32 +67,8 @@ export default {
       margin-bottom: 30px;
     }
   }
-
-  .bottom {
-    background-color: setColor(secondary);
-    margin-bottom: 0px;
-    padding: 20px 0px;
-    display: flex;
-    flex-direction: column;
-    &__icon-set {
-      display: flex;
-      justify-content: center;
-      padding: 30px;
-    }
-    &__icon {
-      @include size(20px);
-      margin: 1px 20px 0px 20px;
-      background-color: setColor(text-color);
-      transition: transform 0.3s, color 0.2s;
-      &:hover {
-        transform: scale(1.2);
-        background-color: setColor(white);
-      }
-    }
-    &__copyright {
-      font-size: 0.8rem;
-      color: setColor(text-color);
-    }
+  > div:last-child {
+    margin-bottom: 0;
   }
 }
 </style>

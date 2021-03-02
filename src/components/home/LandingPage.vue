@@ -37,9 +37,10 @@ export default {
   mounted () {
     this.screenHeight = document.querySelector('.landing-page').offsetHeight
     document.addEventListener('scroll', this.parallax)
-    this.landingPageAnim = gsap.timeline({
-      paused: true
-    })
+    this.landingPageAnim = gsap.timeline({})
+    if (this.getIsLoading) {
+      this.landingPageAnim.pause()
+    }
     let msg = document.querySelectorAll('.msg-block__msg')
     document.querySelectorAll('.layer').forEach((layer, index) => {
       if (index === 0) {
