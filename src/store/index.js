@@ -91,7 +91,6 @@ export default new Vuex.Store({
         description: 'TeleCan was a project which was shortlisted in the 2020 Ustart Project. It use image recognition technology to record the data of trash in certain place. My friend and I just did the freelance work for them to develop the demo website. My friend was responsible for back-end , and I was responsible for front-end,including UI to HTML, visualization, and AWS S3 static website deployment.',
         button: 'visit site',
         buttonCallback: () => {
-          console.log('TeleCan')
           window.open('http://telecan-web.s3-website-ap-northeast-1.amazonaws.com/#/')
         },
         cover: 'telecan.png'
