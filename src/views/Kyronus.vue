@@ -58,7 +58,8 @@ export default {
   data () {
     return {
       icons: ['fb', 'ig', 'github', 'linkedin', 'codepen'],
-      leoIcons: ['github', 'medium', 'ig', 'behance']
+      leoIcons: ['github', 'medium', 'ig', 'behance'],
+      animLeo: null
     }
   },
   methods: {
@@ -84,15 +85,16 @@ export default {
   },
   mounted () {
     window.scrollTo(0, 0)
-    this.tl = gsap.timeline({
+    this.animLeo = gsap.timeline({
       scrollTrigger: {
         id: 'leo',
         trigger: '.leo-section',
         start: 'top bottom',
-        autoRemoveChildren: true
+        autoRemoveChildren: true,
+        markers: true
       }
     })
-    this.tl.from('.leo-section__avatar', {
+    this.animLeo.from('.leo-section__avatar', {
       duration: 0.7,
       x: -100,
       opacity: 0
@@ -103,11 +105,14 @@ export default {
         stagger: {
           amount: 0.5
         },
-        x: -50
+        x: -50,
+        onComplete: () => {
+          console.log('hi')
+        }
       }, '-=0.2')
   },
   beforeDestroy () {
-    this.tl.pause(0).kill(true)
+    this.animLeo.pause(0).kill(true)
     ScrollTrigger.getById('leo').kill(true)
   }
 }

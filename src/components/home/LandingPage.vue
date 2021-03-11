@@ -1,16 +1,16 @@
 <template lang="pug">
   div(class="landing-page")
     div(class="landing-page__container")
-      img(class="layer layer1" data-speed= "0" :src="require('@/assets/img/landingPage/layer1.png')")
-      img(class="layer layer2" data-speed= "2" :src="require('@/assets/img/landingPage/layer2.png')")
-      img(class="layer layer2__house" data-speed= "2" :src="require('@/assets/img/landingPage/layer2_house.svg')")
-      img(class="layer layer3" data-speed= "4" :src="require('@/assets/img/landingPage/layer3.png')")
-      img(class="layer layer4__left" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_left.svg')")
-      img(class="layer layer4__right" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_right.svg')")
-      img(class="layer layer5" data-speed= "6" :src="require('@/assets/img/landingPage/layer5.svg')")
-      img(class="layer layer6" data-speed= "7" :src="require('@/assets/img/landingPage/layer6.svg')")
-      img(class="layer layer7" data-speed= "8" :src="require('@/assets/img/landingPage/layer7.svg')")
-      img(class="layer layer8" data-speed= "10" :src="require('@/assets/img/landingPage/moon.svg')")
+      img(class="layer layer1" data-speed= "0" :src="require('@/assets/img/landingPage/layer1.png')" @load="layerLoaded()")
+      img(class="layer layer2" data-speed= "2" :src="require('@/assets/img/landingPage/layer2.png')" @load="layerLoaded()")
+      img(class="layer layer2__house" data-speed= "2" :src="require('@/assets/img/landingPage/layer2_house.svg')" @load="layerLoaded()")
+      img(class="layer layer3" data-speed= "4" :src="require('@/assets/img/landingPage/layer3.png')" @load="layerLoaded()")
+      img(class="layer layer4__left" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_left.svg')" @load="layerLoaded()")
+      img(class="layer layer4__right" data-speed= "5" :src="require('@/assets/img/landingPage/layer4_right.svg')" @load="layerLoaded()")
+      img(class="layer layer5" data-speed= "6" :src="require('@/assets/img/landingPage/layer5.svg')" @load="layerLoaded()")
+      img(class="layer layer6" data-speed= "7" :src="require('@/assets/img/landingPage/layer6.svg')" @load="layerLoaded()")
+      img(class="layer layer7" data-speed= "8" :src="require('@/assets/img/landingPage/layer7.svg')" @load="layerLoaded()")
+      img(class="layer layer8" data-speed= "10" :src="require('@/assets/img/landingPage/moon.svg')" @load="layerLoaded()")
       div(class="msg-block")
         div
           div(class="msg-block__msg") Welcome Here
@@ -31,12 +31,16 @@ export default {
     return {
       hasPlayed: false,
       landingPageAnim: null,
-      screenHeight: null
+      screenHeight: null,
+      layerLoadedCount: 0
     }
   },
   mounted () {
     this.screenHeight = document.querySelector('.landing-page').offsetHeight
     document.addEventListener('scroll', this.parallax)
+    setTimeout(() => {
+      this.closeLoading()
+    }, 2000)
     this.landingPageAnim = gsap.timeline({})
     if (this.getIsLoading) {
       this.landingPageAnim.pause()
@@ -109,6 +113,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      SET_isLoading: 'SET_isLoading'
+    }),
     parallax (e) {
       let scroll = window.pageYOffset
       if (scroll < this.screenHeight) {
@@ -118,6 +125,18 @@ export default {
             y: scroll * speed / 15
           })
         })
+      }
+    },
+    layerLoaded () {
+      this.layerLoadedCount++
+    },
+    closeLoading () {
+      if (this.layerLoadedCount === 10) {
+        this.SET_isLoading(false)
+      } else {
+        this.setTimeout(() => {
+          this.closeLoading()
+        }, 500)
       }
     }
   }

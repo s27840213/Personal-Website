@@ -16,9 +16,6 @@ export default {
   },
   mounted () {
     this.timeline = gsap.timeline({})
-    setTimeout(() => {
-      this.SET_isLoading(false)
-    }, 2000)
     this.timeline.to('.loading__bar', {
       duration: 0.25,
       scaleY: 0.1,
