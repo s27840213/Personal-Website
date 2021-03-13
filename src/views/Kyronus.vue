@@ -42,7 +42,6 @@ import { mappingUrl } from '@/utils/utility.js'
 import FooterInfo from '@/components/FooterInfo.vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { mapMutations } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -64,9 +63,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      SET_isLoading: 'SET_isLoading'
-    }),
     mappingIcon (icon) {
       return require(`@/assets/icon/${icon}.svg`)
     },
@@ -88,9 +84,6 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.SET_isLoading(false)
-    }, 1000)
     window.scrollTo(0, 0)
     this.animLeo = gsap.timeline({
       scrollTrigger: {

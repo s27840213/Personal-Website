@@ -55,17 +55,14 @@ export default {
     }),
     loading (item, type) {
       if (!this.isAnimating) {
-        if (inKyronus) {
-          setTimeout(() => {
-            this.$router.push('/')
-            window.scrollTo({ top: 0 })
-          }, 650)
-        }
         this.SET_isLoading(true)
         if (type === 'mobile') {
           this.toggleMenu()
         }
         this.SET_scrollTarget(item)
+        setTimeout(() => {
+          this.SET_isLoading(false)
+        }, 1500)
         setTimeout(() => {
           document.querySelector(this.item2class(this.getScrollTarget)).scrollIntoView()
         }, 700)

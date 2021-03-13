@@ -104,7 +104,7 @@ export default {
         this.landingPageAnim.pause()
       } else {
         if (this.hasPlayed) {
-          // this.landingPageAnim.restart()
+          this.landingPageAnim.restart()
         } else {
           this.landingPageAnim.play()
           this.hasPlayed = true

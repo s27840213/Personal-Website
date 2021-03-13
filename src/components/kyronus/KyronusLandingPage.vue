@@ -29,6 +29,11 @@ export default {
       getIsLoading: 'getIsLoading'
     })
   },
+  methods: {
+    ...mapMutations({
+      SET_isLoading: 'SET_isLoading'
+    })
+  },
   watch: {
     getIsLoading () {
       if (this.getIsLoading) {
@@ -44,6 +49,9 @@ export default {
     }
   },
   mounted () {
+    setTimeout(() => {
+      this.SET_isLoading(false)
+    }, 1000)
     this.tl = gsap.timeline()
     if (this.getIsLoading) {
       this.tl.pause()

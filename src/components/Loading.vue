@@ -32,15 +32,15 @@ export default {
       getIsLoading: 'getIsLoading'
     })
   },
-  watch: {
-    getIsLoading () {
-      if (this.getIsLoading) {
-        setTimeout(() => {
-          this.SET_isLoading(false)
-        }, 1500)
-      }
-    }
-  },
+  // watch: {
+  //   getIsLoading () {
+  //     if (this.getIsLoading) {
+  //       setTimeout(() => {
+  //         this.SET_isLoading(false)
+  //       }, 1500)
+  //     }
+  //   }
+  // },
   methods: {
     ...mapMutations({
       SET_isLoading: 'SET_isLoading'
