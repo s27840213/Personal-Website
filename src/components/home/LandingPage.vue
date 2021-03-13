@@ -134,7 +134,7 @@ export default {
       if (this.layerLoadedCount === 10) {
         this.SET_isLoading(false)
       } else {
-        this.setTimeout(() => {
+        setTimeout(() => {
           this.closeLoading()
         }, 500)
       }
